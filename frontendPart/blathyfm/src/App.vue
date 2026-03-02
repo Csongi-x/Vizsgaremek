@@ -33,4 +33,7 @@ export default defineComponent({
 body {
   background-color: #333;
 }
+main {
+  height: 88.5vh;
+}
 </style>

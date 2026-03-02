@@ -7,27 +7,32 @@ export default defineComponent({
 </script>
 
 <template>
-<div class="row align-items-center">
+<section class="row align-items-center">
   <div class="col-md-2 col-lg-4"></div>
-  <div class="col-12 col-sm-12 col-md-8 col-lg-4">
+  <div class="vertical col-12 col-sm-12 col-md-8 col-lg-4">
     <div class="loginPage">
       <form class="w-100 align-items-center">
-        <p class="p-1">
+        <table>
+          <tbody>
           <!--Email cim-->
-          <label>E-mail cím: </label>
-          <input name="email" id="email" required>
-          <br>
+          <tr>
+            <td class="label">E-mail cím: </td>
+            <td class="input"><input type="email" name="email" id="email" required></td>
+          </tr>
           <!--Jelszó-->
-          <label>Jelszó: </label>
-          <input name="password" id="password" required>
-        </p>
+          <tr>
+            <td class="label">Jelszó:</td>
+            <td class="input"><input type="password" name="password" id="password" required></td>
+          </tr>
+          </tbody>
+        </table>
         <!--bejelentkezés-->
         <button type="submit">Bejelentkezés</button>
       </form>
     </div>
   </div>
   <div class="col-md-2 col-lg-4"></div>
-</div>
+</section>
 </template>
 
 <style scoped>
@@ -39,13 +44,26 @@ export default defineComponent({
   align-items: center;
   border: 2px solid black;
 }
+.vertical {
+  display: grid;
+  vertical-align: center;
+  margin-top: 32vh;
+}
 button {
   border: 2px solid black;
   background-color: gold;
   width: 100%;
 }
 input {
-  margin: .25rem;
+  margin: .5rem 3rem .25rem -.5rem;
   border: 2px solid black;
+  width: 100%;
+}
+.label {
+  width: 20%;
+  text-indent: .2rem;
+}
+table, .input {
+  width: 100%;
 }
 </style>

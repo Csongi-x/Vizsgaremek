@@ -43,4 +43,10 @@ const router = createRouter({
   ],
 })
 
+router.beforeEach((to, from, next) => {
+    document.title = 'BláthyFM'
+    // autentikáció
+    next()
+})
+
 export default router
