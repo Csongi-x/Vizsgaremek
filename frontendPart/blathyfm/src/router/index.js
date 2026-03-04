@@ -5,6 +5,7 @@ import SchedulerView from '@/views/schedulerView/SchedulerView.vue'
 import RequestView from "@/views/studentsView/RequestView.vue";
 import SendView from '@/views/studentsView/SendView.vue'
 import LoginView from '@/views/LoginView.vue'
+import StudentHomePage from "@/views/studentsView/StudentHomePage.vue";
 
 
 const router = createRouter({
@@ -40,6 +41,11 @@ const router = createRouter({
       name: 'admin',
       component: AdminView,
   },
+  {
+      path: '/studenthomepage',
+      name: 'studenthomepage',
+      component: StudentHomePage,
+  }
   ],
 })
 
