@@ -1,12 +1,23 @@
 <script>
-import {defineComponent} from 'vue'
+import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
 
-export default defineComponent({
-  name: "LoginView"
-})
+export default{
+  name: "LoginView",
+  components: {SchedulerView},
+  data(){
+    return{
+      email: '',
+      password: '',
+    }
+  },
+  methods:{
+
+  }
+}
 </script>
 
 <template>
+
 <section class="row align-items-center">
   <div class="col-md-2 col-lg-4"></div>
   <div class="vertical col-12 col-sm-12 col-md-8 col-lg-4">
@@ -16,12 +27,12 @@ export default defineComponent({
           <tbody>
           <!--Email cim-->
           <tr>
-            <td class="label">E-mail cím: </td>
+            <td class="label" v-model="email">E-mail cím: </td>
             <td class="input"><input type="email" name="email" id="email" required></td>
           </tr>
           <!--Jelszó-->
           <tr>
-            <td class="label">Jelszó:</td>
+            <td class="label" v-model="password">Jelszó:</td>
             <td class="input"><input type="password" name="password" id="password" required></td>
           </tr>
           </tbody>
