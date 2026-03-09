@@ -5,7 +5,7 @@ export default{
     logout(){
       //Bejelentkezési adatok üresre állítása
 
-      this.$router.push({name: 'home'})
+      this.$router.push({name: 'main-home'})
       this.$emit('logged-out')
     },
     orderMusic(){
