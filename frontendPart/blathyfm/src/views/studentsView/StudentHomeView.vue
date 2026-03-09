@@ -3,7 +3,7 @@ export default{
   name: "StudentHomePage",
   methods:{
     logout(){
-      this.$router.push({name: 'main-home'})
+      this.$router.push({name: 'student-home'})
     },
     send(){
       this.$router.push({name: 'send'})

@@ -3,43 +3,13 @@ export default {
   name: 'HomeLayout',
   data() {
     return {
-      playedSongs: [
-        {
-          id: 1,
-          author: "Falco",
-          title: "Europa",
-          length: "5:08",
-          link: "https://www.youtube.com/watch?=..."
-        },
-        {
-          id: 2,
-          author: "Alphaville",
-          title: "Big in Japan",
-          length: "4:45",
-          link: "https://www.youtube.com/watch?=..."
-        }
-      ], // már lejátszott zenék
-      playlist: [
-        {
-          id: 1,
-          author: "Falco",
-          title: "Einzelhaft",
-          length: "4:01",
-          link: "https://www.youtube.com/watch?=..."
-        },
-        {
-          id: 2,
-          author: "C418",
-          title: "Haunt Muskie",
-          length: "6:02",
-          link: "https://www.youtube.com/watch?=..."
-        }
-      ], // lejátszandó zenék, az első lesz az, ami aktuálisan megy
+      playedSongs: [], // már lejátszott zenék
+      playlist: [], // lejátszandó zenék, az első lesz az, ami aktuálisan megy
     }
   },
   computed: {
     actualSong() {
-      return this.playlist[0]
+      return `${this.playlist[0].author} - ${this.playlist[0].title}`
     },
     upcomingMusic() {
       return this.playlist.filter(music => music.id !== this.actualSong.id)
@@ -49,55 +19,43 @@ export default {
 </script>
 
 <template>
-  <section class="fm-container">
-    <!--Baloldali kártya article-->
-    <article class="card-container playlist-main">
-      <h2 class="title">{{`${this.actualSong.author} - ${this.actualSong.title}`}}</h2>
+  <main class="fm-container">
+    <!--Baloldali kártya section-->
+    <section class="card-container playlist-main">
+      <h2 class="title">{{actualSong}}</h2>
       <ul>
         <li v-for="song in upcomingMusic" :key="song.id">
-          {{song.author}} - {{song.title}} - ({{song.time}})
+          {{song.artist}} - {{song.title}} - ({{song.time}})
         </li>
       </ul>
-    </article>
+    </section>
 
     <!--Jobb felső blokk, kijelentkezés, zene rendezés ->gombok-->
-    <article class="buttons yellow-box login-info">
+    <section class="buttons yellow-box login-info">
       <router-view/>
-    </article>
+    </section>
 
     <!--jobb alsó blokk, lejátszott zenék-->
-    <article class="card-container history">
+    <section class="card-container history">
       <h2 class="title">Lejátszott zenék</h2>
-      <ul>
+      <ul class="song-list">
         <li v-for="song in playedSongs" :key="song.id">
-          {{song.author}} - {{song.title}} (<!-- amikor indult -->)
+          {{song.artist}} - {{song.title}} - (<!-- amikor indult -->)
         </li>
       </ul>
-    </article>
-  </section>
+    </section>
+  </main>
 </template>
 
-<style>
-.fm-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "left right-top"
-    "left right-bottom";
-  gap: 10px;
-  background-color: #333;
-  padding: 10px;
-  height: 90vh;
-}
-
-/* mobil */
+<style scoped>
 @media(max-width: 768px){
   .fm-container{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-  "left"
+  "head"
   "right-top"
+  "left"
   "right-bottom";
     gap: 10px;
     background-color: #333;
@@ -107,14 +65,9 @@ export default {
   }
 }
 
-.title{
-  margin: 0;
-  font-size: 1rem;
-  width: 100%;
-}
 
 /*elemek elhelyezése*/
-.playlist-main {
+.playlist-main{
   grid-area: left;
   display: flex;
   flex-direction: column;
@@ -127,25 +80,24 @@ export default {
 }
 
 /*Styling*/
-.yellow-box {
-  background-color: gold;
-  border: 2px solid black;
+.yellow-box{
+  background-color: yellow;
+  border: 1px solid black;
   font-weight: bold;
+  padding: 8px;
 }
 
-.card-container {
-  border: 3px solid black;
+.card-container{
+  border: 1px solid black;
   background: white;
 }
 
-.title {
-  padding: 1%;
-  border-bottom: 3px solid black;
-  font-size: 1.41rem;
-  background-color: gold;
+.title{
+  margin: 0;
+  font-size: 1rem;
 }
 
-ul {
+.song-list{
   list-style: none;
   padding: 15px;
   margin: 0;
@@ -153,17 +105,9 @@ ul {
   flex-grow: 1;
 }
 
-li {
-  padding: 2px 0;
-}
-
-p {
+p{
   padding: 10px;
   margin: 0;
   font-size: 0.9rem;
-}
-
-button.title:hover{
-  background-color: goldenrod;
 }
 </style>

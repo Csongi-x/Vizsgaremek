@@ -3,7 +3,7 @@ export default {
   name: 'AdminHomeView',
   methods: {
     logout(){
-      this.$router.push({name: 'main-home'})
+      this.$router.push({name: 'admin-home'})
     },
     acceptOrDecline() {
       this.$router.push({name: 'admin'})
