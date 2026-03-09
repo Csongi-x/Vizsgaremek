@@ -1,67 +1,52 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeLayout from '@/components/layouts/HomeLayout.vue'
+import HomeView from '../views/HomeView.vue'
 import AdminView from '@/views/adminView/AdminView.vue'
-import SchedulerHomeView from '@/views/schedulerView/SchedulerHomeView.vue'
+import SchedulerView from '@/views/schedulerView/SchedulerView.vue'
 import RequestView from "@/views/studentsView/RequestView.vue";
 import SendView from '@/views/studentsView/SendView.vue'
 import LoginView from '@/views/LoginView.vue'
+import StudentHomePage from "@/views/studentsView/StudentHomePage.vue";
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { // Főoldal és azok variánsai
+    {
       path: '/',
-      component: HomeLayout,
-      children: [
-          {
-              path: 'home',
-              name: 'main-home',
-              component: () => import('@/views/HomeView.vue')
-          },
-          {
-              path: 'student/home',
-              name: 'student-home',
-              component: () => import('@/views/studentsView/StudentHomeView.vue')
-          },
-          {
-              path: 'admin/home',
-              name: 'admin-home',
-              component: () => import('@/views/adminView/AdminHomeView.vue')
-          },
-          {
-              path: 'scheduler/home',
-              name: 'scheduler-home',
-              component: () => import('@/views/schedulerView/SchedulerHomeView.vue')
-          }
-      ]
+      name: 'home',
+      component: HomeView,
     },
-    { // Bejelentkezési képernyő
+    {
       path: '/login',
       name: 'login',
       component: LoginView,
     },
-  { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
-      path: '/student/request',
+  {
+      path: '/request',
       name: 'request',
       component: RequestView,
   },
   {
-      path: 'student/send',
+      path: '/send',
       name: 'send',
       component: SendView,
   },
   {
-      path: '/scheduler/schedule',
+      path: '/scheduler',
       name: 'scheduler',
-      component: SchedulerHomeView,
+      component: SchedulerView,
   },
   {
       path: '/admin',
       name: 'admin',
       component: AdminView,
+  },
+  {
+      path: '/studenthomepage',
+      name: 'studenthomepage',
+      component: StudentHomePage,
   }
-  ]
+  ],
 })
 
 router.beforeEach((to, from, next) => {

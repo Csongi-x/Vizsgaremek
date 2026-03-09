@@ -43,7 +43,7 @@ export default{
     <section class="card-container history">
       <h2 class="yellow-box title">Lejátszott zenék</h2>
       <ul class="song-list">
-        <li v-for="(song, index) in history" :key="index">{{song.artist}} - {{song.title}} - ({{song.time}})</li>
+        <li v-for="(song, index) in history" :key="song.id">{{song.artist}} - {{song.title}} - ({{song.time}})</li>
       </ul>
     </section>
 
@@ -126,12 +126,13 @@ button.title{
   width: 100%;
   text-align: center;
   background: none;
-  border-bottom: 10px;
+  border-bottom: 1px solid black;
   cursor: pointer;
   display: block;
 }
 button.title:hover{
   background-color: rgba(0,0,0,0.85);
+  color: white;
 }
 
 </style>

@@ -1,13 +1,16 @@
 <script>
+import { RouterLink, RouterView } from 'vue-router'
 import NavBar from "@/components/NavBar.vue";
 import FooterView from "@/components/FooterView.vue"
+import {defineComponent} from "vue";
 
-export default {
+export default defineComponent({
   components: {
     NavBar,
-    FooterView
+    FooterView,
   }
-}
+})
+
 
 </script>
 
