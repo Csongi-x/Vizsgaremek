@@ -3,7 +3,7 @@ import AcceptableMusicRow from '@/components/music-row/AcceptableMusicRow.vue'
 import SavableMusicRow from '@/components/music-row/SavableMusicRow.vue'
 import savableMusicRow from "@/components/music-row/SavableMusicRow.vue";
 
-export default {
+export default defineComponent({
   name: "AdminView",
   components: {
     AcceptableMusicRow,
@@ -39,7 +39,7 @@ export default {
 
     }
   }
-}
+})
 </script>
 
 <template>

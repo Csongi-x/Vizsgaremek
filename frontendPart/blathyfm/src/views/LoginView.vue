@@ -1,6 +1,9 @@
 <script>
+import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
+
 export default{
   name: "LoginView",
+  components: {SchedulerView},
   data(){
     return{
       email: '',
@@ -8,9 +11,7 @@ export default{
     }
   },
   methods:{
-    auth() {
-      // autentikáció: rang alapján eldöntés vagy jelzés, hogy hibásak a bejelentkezési adatok
-    }
+
   }
 }
 </script>
@@ -26,18 +27,18 @@ export default{
           <tbody>
           <!--Email cim-->
           <tr>
-            <td class="label">E-mail cím: </td>
-            <td class="input"><input type="email" name="email" id="email" v-model="email" required></td>
+            <td class="label" v-model="email">E-mail cím: </td>
+            <td class="input"><input type="email" name="email" id="email" required></td>
           </tr>
           <!--Jelszó-->
           <tr>
-            <td class="label">Jelszó:</td>
-            <td class="input"><input type="password" name="password" id="password" v-model="password" required></td>
+            <td class="label" v-model="password">Jelszó:</td>
+            <td class="input"><input type="password" name="password" id="password" required></td>
           </tr>
           </tbody>
         </table>
         <!--bejelentkezés-->
-        <button type="submit" @click="auth">Bejelentkezés</button>
+        <button type="submit">Bejelentkezés</button>
       </form>
     </div>
   </div>
