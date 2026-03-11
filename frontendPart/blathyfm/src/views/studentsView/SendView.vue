@@ -36,16 +36,16 @@ export default{
   <main class="fm-container">
     <section class="card-container send-form">
       <!--rendező-->
-        <label v-model="author">Rendező: </label>
-        <input type="text" placeholder="Előadó neve">
+      <label>Rendező: </label>
+      <input type="text" v-model="author" placeholder="Előadó neve">
       <!--Cím-->
-        <label>Cím: </label>
-        <input type="text" v-model="title" placeholder="Zene címe"></input>
+      <label>Cím: </label>
+      <input type="text" v-model="title" placeholder="Zene címe"></input>
 
-        <label>Üzenet:</label>
-        <textarea v-model="message" placeholder="(opcionális)"></textarea>
+      <label>Üzenet:</label>
+      <textarea v-model="message" placeholder="(opcionális)"></textarea>
 
-        <button @click="sendSong">Zene beküldése</button>
+      <button @click="sendSong">Zene beküldése</button>
     </section>
   </main>
 </template>
