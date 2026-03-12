@@ -19,7 +19,8 @@ const router = createRouter({
               name: 'main-home',
               component: () => import('@/views/HomeView.vue'),
               meta: {
-                  title: "Főoldal"
+                  title: "Főoldal",
+                  requiresAuth: false
               }
           },
           {
@@ -27,7 +28,9 @@ const router = createRouter({
               name: 'student-home',
               component: () => import('@/views/studentsView/StudentHomeView.vue'),
               meta: {
-                  title: "Főoldal"
+                  title: "Főoldal",
+                  requiresAuth: true,
+                  roles: ['student']
               }
           },
           {
@@ -35,7 +38,9 @@ const router = createRouter({
               name: 'admin-home',
               component: () => import('@/views/adminView/AdminHomeView.vue'),
               meta: {
-                  title: "Főoldal"
+                  title: "Főoldal",
+                  requiresAuth: true,
+                  roles: ['admin']
               }
           },
           {
@@ -43,7 +48,9 @@ const router = createRouter({
               name: 'scheduler-home',
               component: () => import('@/views/schedulerView/SchedulerHomeView.vue'),
               meta: {
-                  title: "Főoldal"
+                  title: "Főoldal",
+                  requiresAuth: true,
+                  roles: ['scheduler']
               }
           }
       ]
@@ -53,7 +60,8 @@ const router = createRouter({
       name: 'login',
       component: LoginView,
         meta: {
-            title: "Bejelentkezés"
+            title: "Bejelentkezés",
+            requiresAuth: false
         }
     },
   { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
@@ -61,7 +69,9 @@ const router = createRouter({
       name: 'request',
       component: RequestView,
       meta: {
-          title: "Kérés"
+          title: "Kérés",
+          requiresAuth: true,
+          roles: ['student']
       }
   },
   {
@@ -69,7 +79,9 @@ const router = createRouter({
       name: 'send',
       component: SendView,
       meta: {
-          title: "Küldés"
+          title: "Küldés",
+          requiresAuth: true,
+          roles: ['student']
       }
   },
   {
@@ -77,7 +89,9 @@ const router = createRouter({
       name: 'scheduler',
       component: SchedulerHomeView,
       meta: {
-          title: "Ütemezés"
+          title: "Ütemezés",
+          requiresAuth: true,
+          roles: ['scheduler']
       }
   },
   {
@@ -85,9 +99,21 @@ const router = createRouter({
       name: 'admin',
       component: AdminView,
       meta: {
-          title: "Zenék ellenőrzése"
+          title: "Zenék ellenőrzése",
+          requiresAuth: true,
+          roles: ['admin']
       }
-  }
+  },
+      {
+          path: '/403',
+          name: 'forbidden',
+          component: () => import('@/views/errorsView/ForbiddenView.vue')
+      },
+      {
+          path: '/:pathMatch(.*)*',
+          name: 'not-found',
+          component: () => import('@/views/errorsView/NotFoundView.vue')
+      }
   ]
 })
 

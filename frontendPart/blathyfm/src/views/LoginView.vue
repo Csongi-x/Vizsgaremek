@@ -10,8 +10,10 @@ export default{
   methods:{
     auth() {
       // autentikáció: rang alapján eldöntés vagy jelzés, hogy hibásak a bejelentkezési adatok
+      this.$emit("login", {email: this.email, password: this.password})
     }
-  }
+  },
+  emits: ["login"]
 }
 </script>
 
