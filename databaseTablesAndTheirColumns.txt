@@ -1,8 +1,0 @@
-Személy (e-mail cím (pk), teljes név, személyi rang, jelszó)
-Rang (rang neve (pk))
-Elfogadandó zene (id (pk), előadó, cím, hossz, link)
-Elfogadott zene (id (pk), előadó, cím, hossz, elfogadva-e)
-Zene (id (pk), előadó, cím, hossz, műfaj)
-Műfaj (nűfaj neve (pk))
-Kért zene (id (pk), előadó, cím, hossz, link, üzenet)
-Lejátszási lista (sorszám (pk), előadó, cím, hossz, link)
