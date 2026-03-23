@@ -1,0 +1,57 @@
+CREATE TABLE Role (
+    role_name VARCHAR(50) PRIMARY KEY
+);
+
+CREATE TABLE User (
+    email VARCHAR(100) PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (role) REFERENCES Role(role_name)
+);
+
+CREATE TABLE Genre (
+    genre_name VARCHAR(50) PRIMARY KEY
+);
+
+CREATE TABLE Song (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    artist VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    duration TIME NOT NULL,
+    genre VARCHAR(50),
+    FOREIGN KEY (genre) REFERENCES Genre(genre_name)
+);
+
+CREATE TABLE PendingSong (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    artist VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    duration TIME NOT NULL,
+    link VARCHAR(255)
+);
+
+CREATE TABLE ApprovedSong (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    artist VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    duration TIME NOT NULL,
+    approved BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE RequestedSong (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    artist VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    duration TIME NOT NULL,
+    link VARCHAR(255),
+    message VARCHAR(255)
+);
+
+CREATE TABLE Playlist (
+    order_number INT PRIMARY KEY AUTO_INCREMENT,
+    artist VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    duration TIME NOT NULL,
+    link VARCHAR(255)
+);
