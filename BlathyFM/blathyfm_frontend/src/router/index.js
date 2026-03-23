@@ -5,11 +5,19 @@ import SchedulerHomeView from '@/views/schedulerView/SchedulerHomeView.vue'
 import RequestView from "@/views/studentsView/RequestView.vue";
 import SendView from '@/views/studentsView/SendView.vue'
 import LoginView from '@/views/LoginView.vue'
+import AboutView from "@/views/footerView/AboutView.vue";
+import HowToView from "@/views/footerView/HowToView.vue";
+import RulesView from "@/views/footerView/RulesView.vue";
+import TechnologyView from "@/views/footerView/TechnologyView.vue";
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+      {
+          path: '/',
+          redirect: '/home'
+      },
     { // Főoldal és azok variánsai
       path: '/',
       component: HomeLayout,
@@ -64,16 +72,16 @@ const router = createRouter({
             requiresAuth: false
         }
     },
-  { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
-      path: '/student/request',
-      name: 'request',
-      component: RequestView,
-      meta: {
+    { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
+        path: '/student/request',
+        name: 'request',
+        component: RequestView,
+        meta: {
           title: "Kérés",
           requiresAuth: true,
           roles: ['student']
-      }
-  },
+        }
+    },
   {
       path: '/student/send',
       name: 'send',
@@ -105,15 +113,51 @@ const router = createRouter({
       }
   },
       {
-          path: '/403',
-          name: 'forbidden',
-          component: () => import('@/views/errorsView/ForbiddenView.vue')
+          path: '/about',
+          name: 'about',
+          component: AboutView,
+          meta: {
+              title: 'Impresszum',
+              requiresAuth: false
+          }
       },
       {
-          path: '/:pathMatch(.*)*',
-          name: 'not-found',
-          component: () => import('@/views/errorsView/NotFoundView.vue')
-      }
+          path: '/howto',
+          name: 'howto',
+          component: HowToView,
+          meta: {
+              title: 'Hogy működik?',
+              requiresAuth: false
+          }
+      },
+      {
+          path: '/rules',
+          name: 'rules',
+          component: RulesView,
+          meta: {
+              title: 'Szabályzat',
+              requiresAuth: false
+          }
+      },
+      {
+          path: '/technology',
+          name: 'technology',
+          component: TechnologyView,
+          meta: {
+              title: 'Technika',
+              requiresAuth: false
+          }
+      },
+  {
+      path: '/403',
+      name: 'forbidden',
+      component: () => import('@/views/errorsView/ForbiddenView.vue')
+  },
+  {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/errorsView/NotFoundView.vue')
+  }
   ]
 })
 

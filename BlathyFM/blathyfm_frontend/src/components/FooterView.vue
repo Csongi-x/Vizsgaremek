@@ -9,11 +9,11 @@ export default defineComponent({
 <template>
   <hr>
   <!--Ki kell ezeket még tölteni-->
-  <p class="yellowLine">
-    <router-link class="a yellowLine" to="">Impresszum</router-link> -
-    <router-link class="a yellowLine" to="">Szabályzat</router-link> -
-    <router-link class="a yellowLine" to="">Hogy működik?</router-link> -
-    <router-link class="a yellowLine" to="">Technika</router-link>
+  <p class="whiteLine">
+    <router-link class="a yellowLine" :to="{name: 'about'}">Impresszum</router-link> -
+    <router-link class="a yellowLine" :to="{name: 'rules'}">Szabályzat</router-link> -
+    <router-link class="a yellowLine" :to="{name: 'howto'}">Hogy működik?</router-link> -
+    <router-link class="a yellowLine" :to="{name: 'technology'}">Technika</router-link>
   </p>
 
   <p class="whiteLine">

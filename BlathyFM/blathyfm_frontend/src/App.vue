@@ -60,7 +60,7 @@ body {
   background-color: #333;
 }
 main {
-  height: 88.5vh;
+  min-height: 88.5vh;
 }
 .center-error {
   text-align: center;
