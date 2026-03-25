@@ -15,6 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call([
+            UserSeeder::class,
+            RankSeeder::class,
+            AcceptableMusicSeeder::class,
+            AcceptedMusicSeeder::class,
+            MusicSeeder::class,
+            GenreSeeder::class,
+            RequestedMusicSeeder::class,
+            PlaylistSeeder::class
+        ]);
     }
 }

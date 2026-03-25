@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('requested_music', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("email")
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);
-            $table->string("link", 70);
+            $table->string("link", 100);
             $table->string("message", 160)->nullable();
             $table->timestamps();
         });
