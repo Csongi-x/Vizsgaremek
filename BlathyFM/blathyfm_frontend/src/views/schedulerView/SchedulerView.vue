@@ -19,7 +19,7 @@ export default{
         }
       }
     }
-    },
+  },
   methods:{
     async fetchMusic(){
       this.loading = true
@@ -49,21 +49,21 @@ export default{
 </script>
 
 <template>
-<section>
-  <!--1. oszlop ami minden zene-->
-  <div><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
-    <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
-    <div class="playlist">
-      <h1 class="h2">Zenék</h1>
-      <div v-for="item in playlist" :key="item.id">{{item.author}} - {{item.title}}</div>
+  <section>
+    <!--1. oszlop ami minden zene-->
+    <div><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
+      <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
+      <div class="playlist">
+        <h1 class="h2">Zenék</h1>
+        <div v-for="item in playlist" :key="item.id">{{item.author}} - {{item.title}}</div>
+      </div>
     </div>
-  </div>
 
-  <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
+    <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
     <div class="column">
       <RequestView :requestData="requestData" @add-to-playlist="addMusicToPlaylist"/>
     </div>
-  <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
+    <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
     <div class="column">
       <h1 class="h2"></h1>
       <div v-if="playlist.length === 0">Nincs még zene</div>
@@ -75,7 +75,7 @@ export default{
     </div>
 
 
-</section>
+  </section>
 </template>
 
 <style scoped>
