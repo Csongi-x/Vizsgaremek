@@ -22,13 +22,14 @@ export default{
         songId: this.selectedSong,
         message: this.message
       }
-
+      this.$emit('add-to-playlist', this.requestData.song)
       alert("A zene bekérése elküldve!")
 
       //kiüríted a változókat
       this.selectedSong = null
       this.message = ""
-    }
+    },
+
   }
 }
 </script>
@@ -39,7 +40,7 @@ export default{
     <!--Bal oldal-->
     <section class="card-container playlist-main">
       <h1 class="h4 yellow-box title">Elérhető zenék</h1>
-      <ul class="song-list">
+      <ul class="song-list">;
         <li v-for="song in songs" :key="song.id">{{song.author}} - {{song.title}}</li>
       </ul>
     </section>
