@@ -9,6 +9,7 @@ import AboutView from "@/views/footerView/AboutView.vue";
 import HowToView from "@/views/footerView/HowToView.vue";
 import RulesView from "@/views/footerView/RulesView.vue";
 import TechnologyView from "@/views/footerView/TechnologyView.vue";
+import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
 
 
 const router = createRouter({
@@ -95,7 +96,7 @@ const router = createRouter({
   {
       path: '/scheduler/schedule',
       name: 'scheduler',
-      component: SchedulerHomeView,
+      component: SchedulerView,
       meta: {
           title: "Ütemezés",
           requiresAuth: true,

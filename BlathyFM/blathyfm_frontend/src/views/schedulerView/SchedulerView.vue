@@ -1,6 +1,10 @@
 <script>
+import SchedulerMusicRow from "@/components/SchedulerMusicRow/SchedulerMusicRow.vue";
+import RequestView from "@/views/studentsView/RequestView.vue";
+
 export default{
   name: "SchedulerView",
+  components: {SchedulerMusicRow, RequestView},
   data(){
     return{
       songs:[],
@@ -8,8 +12,14 @@ export default{
       requestedSongs:[],
       loading: false,
       error: '',
+      requestData:{
+        song:{
+          required: true,
+          type: Object
+        }
       }
-    },
+    }
+  },
   methods:{
     async fetchMusic(){
       this.loading = true
@@ -24,9 +34,12 @@ export default{
         this.loading = false;
       }
     },
-    addMusicToPlaylist(){
-
-    }
+    addMusicToPlaylist(song){
+      const exists = this.playlist.find(item => item.id === song.id)
+      if(!exists){
+        this.playlist.push(song)//csak akkor adja hozzá ha még nincs benne
+      }
+    },
   },
   mounted(){
     //itt hívom meg az adatlekérést hogy betöltse a songs tömböt
@@ -36,21 +49,33 @@ export default{
 </script>
 
 <template>
-<section>
-  <!--1. oszlop ami minden zene-->
-  <div><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
+  <section>
+    <!--1. oszlop ami minden zene-->
+    <div><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
+      <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
+      <div class="playlist">
+        <h1 class="h2">Zenék</h1>
+        <div v-for="item in playlist" :key="item.id">{{item.author}} - {{item.title}}</div>
+      </div>
+    </div>
 
-  </div>
-  <div><!--itt azt nézi meg hogy benne van e a playlistben-->
+    <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
+    <div class="column">
+      <RequestView :requestData="requestData" @add-to-playlist="addMusicToPlaylist"/>
+    </div>
+    <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
+    <div class="column">
+      <h1 class="h2"></h1>
+      <div v-if="playlist.length === 0">Nincs még zene</div>
+      <div v-else>
+        <div v-for="song in playlist" :key="song.id">
+          {{song.author}} - {{song.title}}
+        </div>
+      </div>
+    </div>
 
-  </div>
-  <div><!--itt pedig az összes többi (v-else)-->
 
-  </div>
-  <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
-
-  <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
-</section>
+  </section>
 </template>
 
 <style scoped>

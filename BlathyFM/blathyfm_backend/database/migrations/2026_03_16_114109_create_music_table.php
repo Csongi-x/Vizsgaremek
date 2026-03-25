@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);
-            $table->foreignId("genre_id")
+            $table->foreignId("genre")
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string("link", 70);
+            $table->string("link", 100);
             $table->timestamps();
         });
     }
