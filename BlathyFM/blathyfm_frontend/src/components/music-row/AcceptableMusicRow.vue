@@ -26,13 +26,13 @@ export default {
 <p>
   {{ music.author }} - {{ music.title }} ({{ music.length }})
   <span>
-    <button class="uploadButton" @clik="onOpenLink">
+    <button class="uploadButton" @click="onOpenLink">
       <i class="bi bi-box-arrow-in-up-right"/>
     </button>
-    <button class="acceptButton" @clik="onAccept">
+    <button class="acceptButton" @click="onAccept">
       <i class="bi bi-check"/>
     </button>
-    <button class="declineButton" @clik="onDecline">
+    <button class="declineButton" @click="onDecline">
       <i class="bi bi-x"/>
     </button>
   </span>
@@ -40,6 +40,11 @@ export default {
 </template>
 
 <style scoped>
+p {
+  border: 2px solid black;
+  margin: 1vh;
+  padding: 1vh;
+}
 button {
   border: 2px solid black;
   width: 1.5rem;

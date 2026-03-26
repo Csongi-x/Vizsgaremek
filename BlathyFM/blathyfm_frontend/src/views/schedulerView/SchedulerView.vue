@@ -1,6 +1,7 @@
 <script>
-import SchedulerMusicRow from "@/components/SchedulerMusicRow/SchedulerMusicRow.vue";
+import SchedulerMusicRow from "@/components/music-row/SchedulerMusicRow.vue";
 import RequestView from "@/views/studentsView/RequestView.vue";
+import {http} from '@/utils/http.js'
 
 export default{
   name: "SchedulerView",
@@ -49,22 +50,30 @@ export default{
 </script>
 
 <template>
-  <section>
+  <section class="row px-5 m-2">
     <!--1. oszlop ami minden zene-->
-    <div><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
-      <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
-      <div class="playlist">
-        <h1 class="h2">Zenék</h1>
-        <div v-for="item in playlist" :key="item.id">{{item.author}} - {{item.title}}</div>
+    <article class="col-12 col-md-6 col-lg-4"><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
+        <h1 class="h2 row">
+          <span class="col-12 col-md-6 col-lg-6">
+            Zenék
+          </span>
+          <span class="query col-12 col-md-6 col-lg-6 row justify-content-center">
+            <i class="bi bi-search col-2"/>
+            <input class="fullBorder mw-100 col-10">
+          </span>
+        </h1>
+      <div class="allMusic">
+        <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
       </div>
-    </div>
+    </article>
 
     <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
-    <div class="column">
-      <RequestView :requestData="requestData" @add-to-playlist="addMusicToPlaylist"/>
-    </div>
+    <article class="col-12 col-md-6 col-lg-4">
+      <SchedulerMusicRow v-for="requestData in requestedSongs" :song="requestData" @add-to-playlist="addMusicToPlaylist"/>
+    </article>
+
     <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
-    <div class="column">
+    <article class="col-12 col-md-6 col-lg-4">
       <h1 class="h2"></h1>
       <div v-if="playlist.length === 0">Nincs még zene</div>
       <div v-else>
@@ -72,12 +81,30 @@ export default{
           {{song.author}} - {{song.title}}
         </div>
       </div>
-    </div>
-
-
+    </article>
   </section>
 </template>
 
 <style scoped>
-
+article {
+  border: 3px solid black;
+  background-color: white;
+  height: 88.5vh;
+}
+.fullBorder {
+  border: 3px solid black;
+}
+.h2 {
+  border-bottom: 3px solid black;
+  background-color: gold;
+}
+.query {
+  border-left: 3px solid black;
+}
+i::before {
+  left: 8vh
+}
+input {
+  height: 90%;
+}
 </style>
