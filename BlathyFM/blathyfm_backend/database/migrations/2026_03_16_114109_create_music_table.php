@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string("link", 100);
+            $table->string("link", 70);
             $table->timestamps();
         });
     }

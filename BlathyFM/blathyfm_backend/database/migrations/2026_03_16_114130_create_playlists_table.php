@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('playlist', function (Blueprint $table) {
-            $table->unsignedInteger("order_number")->primary();
+            $table->unsignedInteger("order_number");
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);
-            $table->string("link", 100);
+            $table->string("link", 70);
             $table->timestamps();
         });
     }

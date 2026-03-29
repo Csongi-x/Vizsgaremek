@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string("author", 100);
             $table->title("title", 100);
             $table->string("length", 4);
-            $table->string("genre", 30);
-            $table->string("link", 100);
+            $table->string("link", 70);
             $table->timestamps();
         });
     }
