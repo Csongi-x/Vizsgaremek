@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcceptedMusic;
+use App\Models\AcceptableMusic;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -44,6 +44,6 @@ class AcceptableMusicSeeder extends Seeder
             ]
         ];
 
-        foreach ($acceptableMusic as $music) AcceptedMusic::create($acceptableMusic);
+        foreach ($acceptableMusic as $music) AcceptableMusic::create($music);
     }
 }

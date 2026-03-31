@@ -46,6 +46,6 @@ class AcceptedMusicSeeder extends Seeder
             ]
         ];
 
-        foreach ($acceptedMusic as $music) AcceptedMusic::create($acceptedMusic);
+        foreach ($acceptedMusic as $music) AcceptedMusic::create($music);
     }
 }

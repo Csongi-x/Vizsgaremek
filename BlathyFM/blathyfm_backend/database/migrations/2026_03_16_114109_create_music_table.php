@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('music', function (Blueprint $table) {
+            $genres = ["hit", "rock", "metal", "pop", "hip-hop", "jazz", "reggae", "alternative", "vaporwave", "country", "electronic", "folk", "other"];
             $table->id();
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);
-            $table->foreignId("genre")
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->string("link", 70);
+            $table->enum("genre", $genres);
+            $table->string("link", 100);
             $table->timestamps();
         });
     }
