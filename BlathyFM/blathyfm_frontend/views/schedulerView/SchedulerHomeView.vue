@@ -1,0 +1,28 @@
+<script>
+export default{
+  name: "SchedulerView",
+  methods:{
+    logout(){
+      //Bejelentkezési adatok üresre állítása
+
+      this.$router.push({name: 'main-home'})
+      this.$emit('logged-out')
+    },
+    orderMusic(){
+      this.$router.push('/scheduler')
+    }
+  },
+
+}
+</script>
+
+<template>
+    <button class="title border-bottom border-dark" @click="logout">Kijelentkezés</button>
+    <button class="title border-bottom border-dark" @click="orderMusic">Zenék rendezése</button>
+    <p>Kérjük legalább aznap 12:55-ig határozza meg, hogy milyen zenék játszódjanak le az iskolarádióban!</p>
+</template>
+
+<style scoped>
+/* Főképernyő ütemezői (scheduler) variánsát létrehozta: El-Nabulsy Csongor Alan
+   Széttagolta a layout-gyerek viszony létrehozása miatt, valamint a tanulói nézet arra alkalmas részét a layoutba helyezte át: Susán Csongor György */
+</style>
