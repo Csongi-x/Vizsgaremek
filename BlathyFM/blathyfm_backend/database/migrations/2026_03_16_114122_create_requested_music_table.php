@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('requested_music', function (Blueprint $table) {
             $table->id();
+            $table->string("email", 100);
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);

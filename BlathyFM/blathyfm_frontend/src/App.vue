@@ -57,7 +57,11 @@ export default {
   font-family: Arial;
 }
 body {
-  background-image: url('/../public/20260310_221404_1.jpg');
+  background-image: url('../public/20260310_221404.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 main {
   min-height: 88.5vh;

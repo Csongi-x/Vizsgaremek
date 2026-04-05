@@ -9,7 +9,7 @@ export default{
       this.$emit('logged-out')
     },
     orderMusic(){
-      this.$router.push('/scheduler')
+      this.$router.push({name: 'scheduler'})
     }
   },
 

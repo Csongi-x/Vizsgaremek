@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('playlist', function (Blueprint $table) {
             $table->id();
+            $table->integer("order_number");
             $table->string("author", 100);
             $table->string("title", 100);
             $table->string("length", 4);

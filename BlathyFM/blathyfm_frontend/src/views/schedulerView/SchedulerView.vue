@@ -12,13 +12,7 @@ export default{
       playlist:[],//lesz egy gomb a zenék mellett és ha rányom a rendező akkor egy methoddal hozzáadja a playlist-hez
       requestedSongs:[],
       loading: false,
-      error: '',
-      requestData:{
-        song:{
-          required: true,
-          type: Object
-        }
-      }
+      error: ''
     }
   },
   methods:{
@@ -26,9 +20,9 @@ export default{
       this.loading = true
       this.error = '';
       try{
-        //BACKEND CONTROLLERBEN /songs AZ ÚTVONAL
-        const response = await http.get('/songs');
-        this.songs = response.data;
+        //BACKEND CONTROLLERBEN /music AZ ÚTVONAL
+        const response = await http.get('/api/music');
+        this.songs = response.data.musicJson;
       }catch(error){
         this.error = error.message;
       }finally{
@@ -90,6 +84,10 @@ article {
   border: 3px solid black;
   background-color: white;
   height: 88.5vh;
+}
+.allMusic {
+  overflow: scroll;
+  height: 80vh;
 }
 .fullBorder {
   border: 3px solid black;

@@ -152,12 +152,18 @@ const router = createRouter({
   {
       path: '/403',
       name: 'forbidden',
-      component: () => import('@/views/errorsView/ForbiddenView.vue')
+      component: () => import('@/views/errorsView/ForbiddenView.vue'),
+      meta: {
+          title: 'Jogosultsághiba'
+      }
   },
   {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      component: () => import('@/views/errorsView/NotFoundView.vue')
+      component: () => import('@/views/errorsView/NotFoundView.vue'),
+      meta: {
+          title: 'Nem található'
+      }
   }
   ]
 })

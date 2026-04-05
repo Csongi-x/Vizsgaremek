@@ -3,7 +3,7 @@ export default {
   name: 'HomeLayout',
   data() {
     return {
-      playedSongs: [
+      playedSongs: [ // EZEK PÉLDAADATOK! KIVENNI ŐKET, HA MEG LESZ OLDVA A BETÖLTÉS!
         {
           id: 1,
           author: "Falco",
@@ -55,7 +55,7 @@ export default {
       <h2 class="title">{{`${this.actualSong.author} - ${this.actualSong.title}`}}</h2>
       <ul>
         <li v-for="song in upcomingMusic" :key="song.id">
-          {{song.author}} - {{song.title}} - ({{song.time}})
+          {{song.author}} - {{song.title}} - ({{song.length}})
         </li>
       </ul>
     </article>
