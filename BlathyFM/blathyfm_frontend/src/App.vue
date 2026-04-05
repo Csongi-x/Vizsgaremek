@@ -57,7 +57,7 @@ export default {
   font-family: Arial;
 }
 body {
-  background-color: #333;
+  background-image: url('/../public/20260310_221404_1.jpg');
 }
 main {
   min-height: 88.5vh;

@@ -85,7 +85,7 @@ export default {
     "left right-top"
     "left right-bottom";
   gap: 10px;
-  background-color: #333;
+  background-color: transparent;
   padding: 10px;
   height: 90vh;
 }
