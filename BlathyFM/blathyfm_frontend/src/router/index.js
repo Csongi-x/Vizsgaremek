@@ -10,6 +10,7 @@ import HowToView from "@/views/footerView/HowToView.vue";
 import RulesView from "@/views/footerView/RulesView.vue";
 import TechnologyView from "@/views/footerView/TechnologyView.vue";
 import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
+import RegisterView from "@/views/RegisterView.vue";
 
 
 const router = createRouter({
@@ -64,15 +65,24 @@ const router = createRouter({
           }
       ]
     },
-    { // Bejelentkezési képernyő
-      path: '/login',
-      name: 'login',
-      component: LoginView,
-        meta: {
-            title: "Bejelentkezés",
-            requiresAuth: false
-        }
-    },
+      { // Bejelentkezési képernyő
+          path: '/login',
+          name: 'login',
+          component: LoginView,
+          meta: {
+              title: "Bejelentkezés",
+              requiresAuth: false
+          }
+      },
+      { // Regisztrációs oldal
+          path: '/register',
+          name: 'register',
+          component: RegisterView,
+          meta: {
+              title: "Regisztráció",
+              requiresAuth: false
+          }
+      },
     { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
         path: '/student/request',
         name: 'request',

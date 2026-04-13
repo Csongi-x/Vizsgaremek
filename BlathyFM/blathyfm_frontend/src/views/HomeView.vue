@@ -4,6 +4,9 @@ export default{
   methods:{
     login(){
       this.$router.push({name: 'login'})
+    },
+    register(){
+      this.$router.push({name: 'register'})
     }
   }
 }
@@ -12,6 +15,7 @@ export default{
 <template>
   <!--Ez lesz a bejelentkezés blokk-->
   <button class="title border-bottom border-dark" @click="login">Bejelentkezés</button>
+  <button class="title border-bottom border-dark" @click="register">Regisztráció</button>
   <p>A program teljes értékű használatához a Bláthy-ba járó diákok és az ott dolgozó személyzet jogosult.</p>
 </template>
 

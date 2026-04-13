@@ -1,6 +1,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import FooterView from "@/components/FooterView.vue"
+import {http} from "@/utils/http.js";
 
 export default {
   name: 'App',
@@ -22,16 +23,29 @@ export default {
 
       } else {
         this.email = email
-        this.password = pass
+        this.password = password
       }
     },
     check({email, password}) {
       // adatbázisban megnézi, hogy van-e egyezés, ha van, akkor onnan kinyeri a rangot (role),
       // ha nem, akkor hibaüzenetre készteti majd az appot
-      const credentials = [] // email, jelszó (true, ha egyezik, egyébként false), role
+      const credentials = {
+        email: email,
+        password: password
+      } // email, jelszó (true, ha egyezik, egyébként false), role
       if (!credentials) return 'NONE'
-      else if (!credentials[1]) return 'INCORRECT_PASSWORD'
+      else if (!credentials.password) return 'INCORRECT_PASSWORD'
       else return credentials[2]
+    },
+    async register({fullName, email, password, passwordAgain, role, status}) { // regisztráció (adminnak beküldeni a fiókot)
+      const response = await http.post('api/register', {
+        full_name: fullName,
+        email: email,
+        password: password,
+        password_again: passwordAgain,
+        role: role,
+        status: status
+      })
     }
   }
 }
@@ -43,7 +57,7 @@ export default {
     <NavBar/>
   </header>
   <main class="container">
-    <router-view @login="login"/>
+    <router-view @login="login" @register="register" :email="email" :role="role"/>
   </main>
   <footer>
     <FooterView/>
