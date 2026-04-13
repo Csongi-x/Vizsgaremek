@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\PendingUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -11,3 +11,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('login', [UserController::class, 'login']);
 Route::get('/music', [MusicController::class, 'index']);
+Route::post('/register', [PendingUserController::class, 'create']);

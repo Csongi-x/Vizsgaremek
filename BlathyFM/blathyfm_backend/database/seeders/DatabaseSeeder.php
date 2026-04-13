@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             AcceptedMusicSeeder::class,
             MusicSeeder::class,
             RequestedMusicSeeder::class,
-            PlaylistSeeder::class
+            PlaylistSeeder::class,
+            PendingUserSeeder::class
         ]);
     }
 }
