@@ -2,15 +2,12 @@
 import {http} from "@/utils/http.js";
 import AcceptableMusicRow from "@/components/music-row/AcceptableMusicRow.vue";
 import SavableMusicRow from "@/components/music-row/SavableMusicRow.vue";
-import BeforeAcceptMusicRow from "@/components/music-row/BeforeAcceptMusicRow.vue";
-import acceptableMusicRow from "@/components/music-row/AcceptableMusicRow.vue";
 
 export default {
   name: 'SendView',
   components: {
     SavableMusicRow,
     AcceptableMusicRow,
-    BeforeAcceptMusicRow
   },
   data() {
     return {
