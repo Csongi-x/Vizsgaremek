@@ -52,9 +52,9 @@ export default{
 
 <style scoped>
 .send-form{
-  background:white;
+  background:gold;
   padding:20px;
-  border:1px solid black;
+  border:2px solid black;
   width:400px;
   display:flex;
   flex-direction:column;
@@ -63,13 +63,13 @@ export default{
 
 input, textarea{
   padding:6px;
-  border:1px solid black;
+  border: 2px solid black;
 }
 
 button{
-  background:yellow;
-  border:1px solid black;
-  padding:8px;
+  background: gold;
+  border: 2px solid black;
+  padding: 10px;
   cursor:pointer;
   font-weight:bold;
 }
