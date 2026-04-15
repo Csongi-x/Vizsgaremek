@@ -120,7 +120,7 @@ export default{
   padding-left: 10px;
   height: 45px;
 }
-
+ 
 .add-btn {
   background-color: #ffcc00;
   border: none;
