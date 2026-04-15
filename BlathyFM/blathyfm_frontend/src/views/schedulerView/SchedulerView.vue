@@ -62,7 +62,7 @@ export default{
     </article>
 
     <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
-    <article class="col-12 col-md-6 col-lg-4">
+    <article class="requestedMusic col-12 col-md-6 col-lg-4">
       <SchedulerMusicRow v-for="requestData in requestedSongs" :song="requestData" @add-to-playlist="addMusicToPlaylist"/>
     </article>
 
@@ -85,7 +85,7 @@ article {
   background-color: white;
   height: 88.5vh;
 }
-.allMusic {
+.allMusic, .requestedMusic {
   overflow: scroll;
   height: 80vh;
 }

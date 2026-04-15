@@ -11,23 +11,30 @@ export default {
 </script>
 
 <template>
-{{ music.author }} - {{ music.title }} ({{ music.length }})
-  <span :class="music.accepted ? 'accepted' : 'declined'">
+  <p>
+    {{ music.author }} - {{ music.title }} ({{ music.length }})
+    <span :class="music.accepted ? 'accepted' : 'declined'">
     {{ music.accepted ? 'Elfogadva' : 'Elutasítva' }}
-  </span>
+    </span>
+  </p>
 </template>
 
 <style scoped>
+p {
+  border: 2px solid black;
+  margin: .25rem 0 .25rem 0;
+}
 span {
   text-align: center;
-  padding: 3vh;
+  padding: 1vh;
+  right: 1vh;
 }
 .accepted {
-  background-color: #5F5;
+  border: 2px solid #5F5;
   color: #5F5;
 }
 .declined {
-  background-color: red;
+  border: 2px solid red;
   color: red;
 }
 </style>

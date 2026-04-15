@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AcceptableMusicController;
+use App\Http\Controllers\Api\AcceptedMusicController;
 use App\Http\Controllers\Api\MusicController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PendingUserController;
@@ -10,5 +12,9 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('login', [UserController::class, 'login']);
-Route::get('/music', [MusicController::class, 'index']);
 Route::post('/register', [PendingUserController::class, 'create']);
+
+Route::get('/music', [MusicController::class, 'index']);
+Route::get('/accepted_music', [AcceptedMusicController::class, 'index']);
+Route::get('/acceptable_music', [AcceptableMusicController::class, 'index']);
+Route::post('/new_music', [AcceptableMusicController::class, 'store']);

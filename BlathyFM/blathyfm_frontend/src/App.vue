@@ -46,6 +46,14 @@ export default {
         role: role,
         status: status
       })
+    },
+    async send(newMusic) {
+      try {
+        await http.post('/api/new_music', newMusic)
+        alert("A zene sikeresen beküldve!")
+      } catch (error) {
+        alert(`Hiba: ${error}`)
+      }
     }
   }
 }
@@ -57,7 +65,7 @@ export default {
     <NavBar/>
   </header>
   <main class="container">
-    <router-view @login="login" @register="register" :email="email" :role="role"/>
+    <router-view @login="login" @register="register" @send="send" :email="email" :role="role"/>
   </main>
   <footer>
     <FooterView/>
