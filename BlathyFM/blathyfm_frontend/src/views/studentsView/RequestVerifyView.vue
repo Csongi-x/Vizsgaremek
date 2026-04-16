@@ -1,11 +1,16 @@
 <script>
 export default{
   name: "RequestVerifyView",
+  props:[
+
+  ],
   data(){
     return{
       author: "",
       title: "",
-      message: ""
+      message: "",
+      loading :false,
+      error: ""
     }
   },
   methods:{
@@ -27,8 +32,29 @@ export default{
       this.author = ""
       this.title = ""
       this.message = ""
+    },
+    async fetchSongs(){
+      this.loading = true
+      try{
+        const id = this.$route.params.id
+
+        const response = await http.get(`/api/music/${id}`)
+
+        const song = response.data
+
+        this.author = song.author
+        this.title = song.title
+        this.message = song.message || ""
+      }catch(err){
+        this.error = err.message
+      }finally{
+        this.loading = false
+      }
     }
-  }
+  },
+  async mounted(){
+    this.fetchSongs()
+  },
 }
 </script>
 
