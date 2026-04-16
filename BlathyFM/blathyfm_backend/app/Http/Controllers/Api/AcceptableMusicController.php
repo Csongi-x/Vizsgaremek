@@ -12,7 +12,7 @@ class AcceptableMusicController extends Controller
         $acceptableMusic = AcceptableMusic::all();
         return response()->json([
             "success" => true,
-            "message" => "List of acceptable music",
+            "message" => "Elfogadás/elutasítás előtt álló zenék listája",
             "acceptableMusic" => $acceptableMusic
         ]);
     }
@@ -21,7 +21,7 @@ class AcceptableMusicController extends Controller
         AcceptableMusic::create($request->all());
         return response()->json([
             "success" => true,
-            "message" => "New music added to the waitlist",
+            "message" => "A zene sikeresen beküldve!",
             "music" => $request->all()
         ], 201);
     }

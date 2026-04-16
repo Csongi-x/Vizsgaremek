@@ -24,7 +24,7 @@ export default {
         takarnak.
       </li>
       <li>
-        Gyerekdalokat nem kérünk a listára, köszönjük szépen.
+        Gyerekdalokat nem kérünk a listára, köszönjük.
       </li>
       <li>
         A zene legalább 1 perc és legfeljebb 9 perc 59 másodperc hosszú lehet. Az ennél hosszabb zenék megkockáztatják
@@ -64,8 +64,9 @@ export default {
         Egy zene a lejátszás után egy hétig nem kérhető be.
       </li>
       <li>
-        Az olyan bekéréseket, amelyekhez komolytalan vagy trágár üzenet társul, az ütemező nem köteles azoknak
-        eleget tenni.
+        Az olyan bekéréseket, amelyekhez komolytalan vagy trágár üzenet társul, vagy a két fenti szabályba ütközne
+        (pl. valaki egy napra 7 vagy több zenét kérne be vagy ugyanazt a zenét ugyanazon a héten többször hallani
+        szeretné), az ütemező nem köteles azoknak eleget tenni.
       </li>
     </ul>
     <h2>Szabálykörök megsértése</h2>
@@ -73,17 +74,18 @@ export default {
       <li>
         Amennyiben kiderül, hogy bárki sikeresen hozzáfér egy nem őhozzá rendelt szerepkörhöz (azaz más, tőle eltérő
         szerepkörű személy fiókjával jelentkezik be) és ezzel jogtalan lépéseket tesz, az diák esetében intővel,
-        felnőtt (azaz adminisztrátor vagy ütemező) esetében a munkakörtől való megfosztással büntetendő.
+        felnőtt (azaz adminisztrátor vagy ütemező) esetében fizetéslevonással vagy a munkakörtől való megfosztással
+        büntetendő.
       </li>
       <li>
-        Ha egy nem odaillő zene elfogadásra, majd pedig lejátszásra kerül, az adminisztrátor felelősségre vonható
-        a zene elfogadásáért. Ha azért nem ő, hanem egy diák (esetleg ütemező) jogtalan belépésen keresztül felelős,
-        akár a tanulói (ütemező esetén munkavállalói) jogviszony megszüntetésével is büntethető. Ez természetesen az
-        adott zene szabálytalanságának mértékétől is függ.
+        Ha egy nem odaillő zene elfogadásra, majd pedig lejátszásra kerül, az ütemező felelősségre vonható
+        a zene elfogadásáért. Ha azért nem ő, hanem egy diák (esetleg adminisztrátor) jogtalan belépésen keresztül
+        felelős, akár a tanulói (adminisztrátor esetén munkavállalói) jogviszony megszüntetésével is büntethető. Ez
+        természetesen az adott zene szabálytalanságának mértékétől is függ.
       </li>
       <li>
-        Szükség esetén az adminisztrátor bejelentkezhet egy ütemezői fiókba is, de ehhez speciális (pl. igazgatói)
-        engedély szükséges.
+        Szükség esetén az adminisztrátor bejelentkezhet egy ütemezői fiókba is (vagy fordítva), de ehhez speciális
+        (pl. igazgatói) engedély szükséges.
       </li>
     </ul>
   </section>

@@ -12,11 +12,16 @@ use Illuminate\Support\Facades\Hash;
 class PendingUserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the list of unregistered users.
      */
     public function index()
     {
-        //
+        $users = PendingUser::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'List of unregistered users',
+            'pending_users' => $users
+        ]);
     }
 
     /**
@@ -24,7 +29,7 @@ class PendingUserController extends Controller
      */
     public function create(StoreUserRequest $request)
     {
-        $existingEmails = User::select('email')->where('email', '=', $request->email)->get();
+        $existingEmails = User::select('email')->where('email', $request->email)->get();
         if (!$existingEmails->isEmpty()) {
             return response()->json([
                 "success" => false,
@@ -53,11 +58,34 @@ class PendingUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Adds a user to the regular users' table (it was accepted by one of the admins)
      */
     public function store(Request $request)
     {
-        //
+        $user = null;
+        try {
+            $user = PendingUser::find($request->id);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Hiba: A felhasználót nem találja a rendszer. ($e)"
+            ], 404);
+        }
+        $user->status = "accepted";
+        $user->update();
+        User::create(
+            [
+                "full_name" => $user->full_name,
+                "email" => $user->email,
+                "role" => $user->role,
+                "password" => Hash::make($user->password)
+            ]
+        );
+        return response()->json([
+            "success" => true,
+            "message" => "Felhasználó sikeresen hozzáadva!",
+            "user" => $user
+        ], 201);
     }
 
     /**
@@ -71,9 +99,24 @@ class PendingUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PendingUser $pendingUser)
+    public function edit(Request $request)
     {
-        //
+        $user = null;
+        try {
+            $user = PendingUser::find($request->id);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Hiba: A felhasználót nem találja a rendszer. ($e)"
+            ], 404);
+        }
+        $user->status = "declined";
+        $user->update();
+        return response()->json([
+            "success" => true,
+            "message" => "A felhasználó regisztrációja sikeresen el lett utasítva!",
+            "user" => $user
+        ]);
     }
 
     /**

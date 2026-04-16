@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeLayout from '@/components/layouts/HomeLayout.vue'
-import AdminView from '@/views/adminView/AdminView.vue'
+import SchedulerAcceptMusicView from '@/views/schedulerView/SchedulerAcceptMusicView.vue'
 import SchedulerHomeView from '@/views/schedulerView/SchedulerHomeView.vue'
 import RequestView from "@/views/studentsView/RequestView.vue";
 import SendView from '@/views/studentsView/SendView.vue'
@@ -11,6 +11,7 @@ import RulesView from "@/views/footerView/RulesView.vue";
 import TechnologyView from "@/views/footerView/TechnologyView.vue";
 import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import AdminCheckUsersView from "@/views/adminView/AdminCheckUsersView.vue";
 
 
 const router = createRouter({
@@ -116,13 +117,23 @@ const router = createRouter({
   {
       path: '/admin',
       name: 'admin',
-      component: AdminView,
+      component: SchedulerAcceptMusicView,
       meta: {
           title: "Zenék ellenőrzése",
           requiresAuth: true,
           roles: ['admin']
       }
   },
+      {
+          path: '/admin/checkusers',
+          name: 'admin-check-users',
+          component: AdminCheckUsersView,
+          meta: {
+              title: 'Új felhasználók regisztráltatása',
+              requiresAuth: true,
+              roles: ['admin']
+          }
+      },
       {
           path: '/about',
           name: 'about',

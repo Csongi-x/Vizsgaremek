@@ -49,8 +49,24 @@ export default {
     },
     async send(newMusic) {
       try {
-        await http.post('/api/new_music', newMusic)
-        alert("A zene sikeresen beküldve!")
+        const response = await http.post('/api/new_music', newMusic)
+        alert(response.data.message)
+      } catch (error) {
+        alert(`Hiba: ${error}`)
+      }
+    },
+    async acceptUser(id) {
+      try {
+        const response = await http.post('/api/pending_users', {id: id})
+        alert(response.data.message)
+      } catch (error) {
+        alert(`Hiba: ${error}`)
+      }
+    },
+    async declineUser(id) {
+      try {
+        const response = await http.patch('/api/pending_users', {id: id, status: 'declined'})
+        alert(response.data.message)
       } catch (error) {
         alert(`Hiba: ${error}`)
       }
@@ -65,7 +81,9 @@ export default {
     <NavBar/>
   </header>
   <main class="container">
-    <router-view @login="login" @register="register" @send="send" :email="email" :role="role"/>
+    <router-view @login="login" @register="register" @send="send"
+                 @accept="acceptUser" @decline="declineUser"
+                 :email="email" :role="role"/>
   </main>
   <footer>
     <FooterView/>
