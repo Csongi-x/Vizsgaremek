@@ -3,12 +3,13 @@ import SchedulerMusicRow from "@/components/music-row/SchedulerMusicRow.vue";
 import RequestView from "@/views/studentsView/RequestView.vue";
 import {http} from '@/utils/http.js'
 
+//music, requestedMusic, playlist -» ezek kellenek
 export default{
   name: "SchedulerView",
   components: {SchedulerMusicRow, RequestView},
   data(){
     return{
-      songs:[],
+      songs:[],// Minden zene
       playlist:[],//lesz egy gomb a zenék mellett és ha rányom a rendező akkor egy methoddal hozzáadja a playlist-hez
       requestedSongs:[],
       loading: false,
@@ -35,10 +36,29 @@ export default{
         this.playlist.push(song)//csak akkor adja hozzá ha még nincs benne
       }
     },
+    async loadData(){
+      this.loading = true;
+      this.error = ''
+      try{
+        const [music, requestedMusic, playlist] = await Promise.all([
+          axios.get('http://api/music'),
+          axios.get('http://api/requestedMusic'),
+          axios.get('http://api/playlist')
+        ])
+        this.songs = music.data
+        this.requestedSongs = requestedMusic.data
+        this.playlist = playlist.data
+      }catch(err){
+        this.error = err.message
+      }finally{
+        this.loading = false;
+      }
+    }
   },
   mounted(){
     //itt hívom meg az adatlekérést hogy betöltse a songs tömböt
     this.fetchMusic();
+    this.loadData();
   }
 }
 </script>

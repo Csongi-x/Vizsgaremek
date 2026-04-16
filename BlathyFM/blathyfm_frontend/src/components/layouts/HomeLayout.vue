@@ -19,6 +19,7 @@ export default {
           link: "https://www.youtube.com/watch?=..."
         }
       ], // már lejátszott zenék
+
       playlist: [
         {
           id: 1,
@@ -44,6 +45,26 @@ export default {
     upcomingMusic() {
       return this.playlist.filter(music => music.id !== this.actualSong.id)
     }
+  },
+  methods:{
+    async loadData(){
+      this.loading = true
+      try{
+        const [playlist, playedlist] = await Promise.all([
+          axios.get('http://api/music'),
+          axios.get('http://api/playedlist')//Ezt még létre kell hozni a backendben
+        ])
+        this.playlist = playlist.data
+        this.playedSongs = playedlist.data
+      }catch(e){
+        this.error = e.message
+      }finally{
+        this.loading = false
+      }
+    }
+  },
+  async mounted(){
+    this.loadData()
   }
 }
 </script>
