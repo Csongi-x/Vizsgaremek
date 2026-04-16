@@ -11,6 +11,7 @@ import RulesView from "@/views/footerView/RulesView.vue";
 import TechnologyView from "@/views/footerView/TechnologyView.vue";
 import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import RequestVerifyView from "@/views/studentsView/RequestVerifyView.vue";
 
 
 const router = createRouter({
@@ -81,6 +82,17 @@ const router = createRouter({
           meta: {
               title: "Regisztráció",
               requiresAuth: false
+          }
+      },
+      {
+          //RequestVerifyView
+          path: '/requestverify/:id',
+          name: 'requestVerify',
+          component: RequestVerifyView,
+          meta:{
+              title: "RequestVerify",
+              requiresAuth: true,
+              roles: ['student']
           }
       },
     { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
