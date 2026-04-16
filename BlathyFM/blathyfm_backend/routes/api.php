@@ -18,3 +18,6 @@ Route::get('/music', [MusicController::class, 'index']);
 Route::get('/accepted_music', [AcceptedMusicController::class, 'index']);
 Route::get('/acceptable_music', [AcceptableMusicController::class, 'index']);
 Route::post('/new_music', [AcceptableMusicController::class, 'store']);
+//Még egy Route a lejátszott számoknak -> api/playedlist
+//RequestedMusic route -» api/requestedMusic
+//playlist -» api/playlist
