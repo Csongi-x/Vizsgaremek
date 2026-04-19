@@ -19,6 +19,7 @@ Route::get('/pending_users', [PendingUserController::class, 'index']);
 Route::post('/pending_users', [PendingUserController::class, 'store']);
 Route::patch('/pending_users', [PendingUserController::class, 'store']);
 
+Route::get('/music/{id}', [MusicController::class, 'show']);
 Route::get('/music', [MusicController::class, 'index']);
 Route::get('/accepted_music', [AcceptedMusicController::class, 'index']);
 Route::get('/acceptable_music', [AcceptableMusicController::class, 'index']);

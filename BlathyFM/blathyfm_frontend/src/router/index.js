@@ -97,7 +97,7 @@ const router = createRouter({
       {
           //RequestVerifyView
           path: '/requestverify/:id',
-          name: 'requestVerify',
+          name: 'request-verify',
           component: RequestVerifyView,
           meta:{
               title: "RequestVerify",

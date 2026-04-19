@@ -27,9 +27,17 @@ class MusicController extends Controller
 
         return response()->json([
             "success" => true,
-            "message" => "List of music that are not requested",
+            "message" => "(Be nem kért) zenék",
             "musicJson" => $musicJson
         ]);
+    }
 
+    public function show($id){
+        $music = Music::find($id);
+        return response()->json([
+            "success" => true,
+            "message" => "$id ID-jú zene adatai",
+            "music" => $music
+        ]);
     }
 }

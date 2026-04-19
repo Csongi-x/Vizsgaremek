@@ -11,7 +11,7 @@ class AcceptedMusicController extends Controller
         $acceptedMusic = AcceptedMusic::all();
         return response()->json([
             "success" => true,
-            "message" => "List of accepted and declined music",
+            "message" => "Elfogadott/elutasított zenék listája",
             "acceptedMusic" => $acceptedMusic,
         ]);
     }

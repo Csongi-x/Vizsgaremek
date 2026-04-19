@@ -1,79 +1,55 @@
 <script>
-export default{
-  name: "RequestVerifyView",
-  props:[
+import {http} from "@/utils/http.js";
 
-  ],
+export default {
+  name: "RequestVerifyView",
   data(){
     return{
-      author: "",
-      title: "",
-      message: "",
-      loading :false,
-      error: ""
+      music: {},
+      message: ''
     }
   },
   methods:{
-    sendSong(){
-      //hiba kerülés
-      if(!this.author || !this.title){
-        alert("Előadó és cím kötelező!")
-        return
-      }
-      const songData = {
-        author: this.author,
-        title: this.title,
-        message: this.message
-      }
-
-      alert("Zene sikeresen beküldve!")
-
-      //Kiürítés
-      this.author = ""
-      this.title = ""
-      this.message = ""
-    },
-    async fetchSongs(){
-      this.loading = true
-      try{
-        const id = this.$route.params.id
-
+    async loadMusicById(id) {
+      try {
         const response = await http.get(`/api/music/${id}`)
-
-        const song = response.data
-
-        this.author = song.author
-        this.title = song.title
-        this.message = song.message || ""
-      }catch(err){
-        this.error = err.message
-      }finally{
-        this.loading = false
+        this.music = response.data.music
+      } catch {
+        alert('Sajnos a zene nem kérhető le a szerver meghibásodása vagy leállása miatt.')
       }
+    },
+    sendSong(){
+      this.$emit('request:song', {id: this.music.id, message: this.message})
     }
   },
-  async mounted(){
-    this.fetchSongs()
+  mounted() {
+    this.loadMusicById(this.$route.params.id)
   },
+  emits: ['request:song']
 }
 </script>
 
 <template>
-  <main class="fm-container">
-    <section class="card-container send-form">
-      <!--rendező-->
-      <label>Rendező: </label>
-      <input type="text" v-model="author" placeholder="Előadó neve">
-      <!--Cím-->
-      <label>Cím: </label>
-      <input type="text" v-model="title" placeholder="Zene címe">
-
-      <label>Üzenet:</label>
-      <textarea v-model="message" placeholder="(opcionális)"></textarea>
-
-      <button @click="sendSong">Zene beküldése</button>
+  <section class="col-md-1 col-lg-3"/>
+    <section class="col-12 col-sm-12 col-md-10 col-lg-6 card-container send-form">
+      <table>
+        <tr>
+          <td>Előadó:&nbsp;</td>
+          <td class="data">{{ music.author }}</td>
+        </tr>
+        <tr>
+          <td>Cím:&nbsp;</td>
+          <td class="data">{{ music.title }}</td>
+        </tr>
+        <tr>
+          <td>Hossz:&nbsp;</td>
+          <td class="data">{{ music.length }}</td>
+        </tr>
+      </table>
+      <textarea rows="6" v-model="message" placeholder="Üzenet (opcionális)"></textarea>
+      <button class="title" @click="sendSong">Bekérés</button>
     </section>
-  </main>
+  <section class="col-md-1 col-lg-3"/>
 </template>
 
 <style scoped>
@@ -87,9 +63,15 @@ export default{
   gap:10px;
 }
 
-input, textarea{
+input, textarea {
   padding:6px;
   border: 2px solid black;
+}
+
+.data {
+  background-color: yellow;
+  border: 2px solid black;
+  width: 88%;
 }
 
 button{
@@ -103,5 +85,13 @@ button{
 button:hover{
   background:black;
   color:white;
+}
+
+.title{
+  margin: 0;
+  font-size: 1rem;
+  width: 100%;
+  border-top: 2px solid black;
+  text-align: center;
 }
 </style>
