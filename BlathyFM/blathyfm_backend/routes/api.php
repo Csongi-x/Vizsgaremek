@@ -26,3 +26,8 @@ Route::post('/new_music', [AcceptableMusicController::class, 'store']);
 //Még egy Route a lejátszott számoknak -> api/playedlist
 //RequestedMusic route -» api/requestedMusic
 //playlist -» api/playlist
+Route::post('/request', [RequestedMusicController::class, 'store']);
+Route::post('/accepted_music', [AcceptedMusicController::class, 'store']);
+
+Route::delete('/music_played/{id}', [AcceptedMusicController::class, 'delete']);
+Route::get('/music_played', [AcceptedMusicController::class, 'save']);
