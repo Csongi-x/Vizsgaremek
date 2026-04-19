@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PendingUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {   
     // amihez token kell
 });
 
@@ -27,3 +27,8 @@ Route::post('/new_music', [AcceptableMusicController::class, 'store']);
 //Még egy Route a lejátszott számoknak -> api/playedlist
 //RequestedMusic route -» api/requestedMusic
 //playlist -» api/playlist
+Route::post('/request', [RequestedMusicController::class, 'store']);
+Route::post('/accepted_music', [AcceptedMusicController::class, 'store']);
+
+Route::delete('/music_played/{id}', [AcceptedMusicController::class, 'delete']);
+Route::get('/music_played', [AcceptedMusicController::class, 'save']);
