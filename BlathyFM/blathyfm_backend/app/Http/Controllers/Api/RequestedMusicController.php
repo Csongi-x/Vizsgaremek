@@ -16,4 +16,15 @@ class RequestedMusicController extends Controller
             "requested_music" => $requestedMusic
         ]);
     }
+    public function store(Request $request){
+        $data = $request->all([]);
+        RequestedMusic::create($data);
+        return response()->json([
+            "success" => true,
+            "message" => "Sikeresen rögzítettük a zenét a listában",
+            "requested_music" => $data
+        ], 201);
+
+    }
+
 }
