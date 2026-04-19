@@ -2,11 +2,13 @@
 import SchedulerMusicRow from "@/components/music-row/SchedulerMusicRow.vue";
 import RequestView from "@/views/studentsView/RequestView.vue";
 import {http} from '@/utils/http.js'
+import Spinner from "@/components/Spinner.vue";
+import PlaylistMusicRow from "@/components/music-row/PlaylistMusicRow.vue";
 
 //music, requestedMusic, playlist -» ezek kellenek
 export default{
   name: "SchedulerView",
-  components: {SchedulerMusicRow, RequestView},
+  components: {PlaylistMusicRow, Spinner, SchedulerMusicRow, RequestView},
   data(){
     return{
       songs:[],// Minden zene
@@ -53,6 +55,17 @@ export default{
       }finally{
         this.loading = false;
       }
+    },
+    up(id) {
+      if (id > 1) {
+        // feljebb rakni
+      }
+    },
+    down(id) {
+      // lejjebb rakni
+    },
+    deleteFromPlaylist(id) {
+      // törölni
     }
   },
   mounted(){
@@ -77,22 +90,24 @@ export default{
           </span>
         </h1>
       <div class="allMusic">
+        <Spinner v-if="loading"/>
         <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
       </div>
     </article>
 
     <!--2. oszlop amibe elágazással hogy bekért zene e vagy nem-->
     <article class="requestedMusic col-12 col-md-6 col-lg-4">
+      <Spinner v-if="loading"/>
       <SchedulerMusicRow v-for="requestData in requestedSongs" :song="requestData" @add-to-playlist="addMusicToPlaylist"/>
     </article>
 
     <!--3. oszlop megint elágazással, amelyik meg be lett rakva a lejátszási listára-->
     <article class="col-12 col-md-6 col-lg-4">
       <h1 class="h2"></h1>
-      <div v-if="playlist.length === 0">Nincs még zene</div>
+      <div v-if="playlist.length === 0">A lejátszási lista üres</div>
       <div v-else>
         <div v-for="song in playlist" :key="song.id">
-          {{song.author}} - {{song.title}}
+          <PlaylistMusicRow :music="music" @up="up" @down="down" @delete="deleteFromPlaylist"/>
         </div>
       </div>
     </article>
@@ -103,11 +118,11 @@ export default{
 article {
   border: 3px solid black;
   background-color: white;
-  height: 88.5vh;
+  height: 85vh;
 }
 .allMusic, .requestedMusic {
   overflow: scroll;
-  height: 80vh;
+  height: 75vh;
 }
 .fullBorder {
   border: 3px solid black;

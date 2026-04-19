@@ -37,8 +37,8 @@ export default {
 </script>
 
 <template>
-  <div class="waiting-container">
-    <div class="content-card">
+  <div class="row">
+    <div class="col-12">
 
       <div v-if="userStatus === 'pending'" class="status-box">
         <div class="spinner"></div> <h1>Feldolgozás alatt...</h1>

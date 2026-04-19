@@ -9,7 +9,7 @@ export default{
   },
   methods:{
     auth() {
-      // autentikáció: rang alapján eldöntés vagy jelzés, hogy hibásak a bejelentkezési adatok
+      // autentikáció: jogkör alapján eldöntés vagy jelzés, hogy hibásak a bejelentkezési adatok
       this.$emit("login", {email: this.email, password: this.password})
     }
   },

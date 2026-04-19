@@ -11,41 +11,43 @@ export default {
   },
   data() {
     return {
-      email: "",
-      role: "",
-      error: ""
+      email: '',
+      password: '',
+      role: '',
+      token: '',
+      error: ''
+    }
+  },
+  computed: {
+    isAuth() {
+      return this.email !== '' && this.password !== '' && this.role !== '' && this.token !== ''
     }
   },
   methods: {
     login({email, password}) {
-      this.role = this.check({email, password})
-      if (this.role === 'NONE') {
-
-      } else {
-        this.email = email
-        this.password = password
-      }
+      this.email = email
+      this.password = password
+      this.$router.push({name : 'waiting'})
     },
     check({email, password}) {
       // adatbázisban megnézi, hogy van-e egyezés, ha van, akkor onnan kinyeri a rangot (role),
       // ha nem, akkor hibaüzenetre készteti majd az appot
-      const credentials = {
-        email: email,
-        password: password
-      } // email, jelszó (true, ha egyezik, egyébként false), role
-      if (!credentials) return 'NONE'
-      else if (!credentials.password) return 'INCORRECT_PASSWORD'
-      else return credentials[2]
     },
     async register({fullName, email, password, passwordAgain, role, status}) { // regisztráció (adminnak beküldeni a fiókot)
-      const response = await http.post('api/register', {
-        full_name: fullName,
-        email: email,
-        password: password,
-        password_again: passwordAgain,
-        role: role,
-        status: status
-      })
+      let response = null
+      try {
+        response = await http.post('api/register', {
+          full_name: fullName,
+          email: email,
+          password: password,
+          password_again: passwordAgain,
+          role: role,
+          status: status
+        })
+      } catch (error) {
+        this.error = ` Hiba: ${error}`
+      }
+      this.$router.push({name: 'waiting'})
     },
     async send(newMusic) {
       try {
@@ -83,7 +85,7 @@ export default {
   <main class="container">
     <router-view @login="login" @register="register" @send="send"
                  @accept="acceptUser" @decline="declineUser"
-                 :email="email" :role="role"/>
+                 :email="email" :password="password" :role="role"/>
   </main>
   <footer>
     <FooterView/>

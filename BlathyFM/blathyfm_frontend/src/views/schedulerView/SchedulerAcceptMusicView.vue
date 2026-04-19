@@ -2,10 +2,12 @@
 import AcceptableMusicRow from '@/components/music-row/AcceptableMusicRow.vue'
 import SavableMusicRow from '@/components/music-row/SavableMusicRow.vue'
 import savableMusicRow from "@/components/music-row/SavableMusicRow.vue";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
   name: "AdminView",
   components: {
+    Spinner,
     AcceptableMusicRow,
     SavableMusicRow
   },
@@ -46,6 +48,7 @@ export default {
 <section class="row">
   <article class="col-12 col-sm-12 col-lg-6 col-xl-6">
     <div class="list-group list-group-flush">
+      <Spinner v-if="loading"/>
       <div class="musicGrid list-group-item" v-for="music in pendingMusic" :key="music.id">
         <AcceptableMusicRow :music="music" @open-link="openLink" @accept="acceptOrDecline" @decline="acceptOrDecline" />
       </div>

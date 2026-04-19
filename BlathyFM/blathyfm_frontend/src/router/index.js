@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeLayout from '@/components/layouts/HomeLayout.vue'
-import SchedulerAcceptMusicView from '@/views/schedulerView/SchedulerAcceptMusicView.vue'
-import SchedulerHomeView from '@/views/schedulerView/SchedulerHomeView.vue'
 import RequestView from "@/views/studentsView/RequestView.vue";
 import SendView from '@/views/studentsView/SendView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -13,6 +11,8 @@ import SchedulerView from "@/views/schedulerView/SchedulerView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import AdminCheckUsersView from "@/views/adminView/AdminCheckUsersView.vue";
 import RequestVerifyView from "@/views/studentsView/RequestVerifyView.vue";
+import SchedulerAcceptMusicView from "@/views/schedulerView/SchedulerAcceptMusicView.vue";
+import App from "@/App.vue";
 
 
 const router = createRouter({
@@ -86,6 +86,15 @@ const router = createRouter({
           }
       },
       {
+          path: '/waiting',
+          name: 'waiting',
+          component: () => import('@/views/WaitingView.vue'),
+          meta: {
+              title: 'Regisztráltatás',
+              requiresAuth: false
+          }
+      },
+      {
           //RequestVerifyView
           path: '/requestverify/:id',
           name: 'requestVerify',
@@ -129,7 +138,7 @@ const router = createRouter({
   {
       path: '/admin',
       name: 'admin',
-      component: AdminView,
+      component: SchedulerAcceptMusicView,
       meta: {
           title: "Zenék ellenőrzése",
           requiresAuth: true,
@@ -204,7 +213,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} - BláthyFM`
     // autentikáció
-    next()
+    if (!App.computed.isAuth() && to.meta.requiresAuth) next({name: 'forbidden'})
+    else next()
 })
 
 export default router
