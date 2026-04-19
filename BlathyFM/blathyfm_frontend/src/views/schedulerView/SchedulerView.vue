@@ -107,7 +107,8 @@ export default{
       <div v-if="playlist.length === 0">A lejátszási lista üres</div>
       <div v-else>
         <div v-for="song in playlist" :key="song.id">
-          <PlaylistMusicRow :music="music" @up="up" @down="down" @delete="deleteFromPlaylist"/>
+          <PlaylistMusicRow v-for="music in playlist" :key="music.id" :music="music" @up="up" @down="down"
+                            @delete="deleteFromPlaylist"/>
         </div>
       </div>
     </article>
