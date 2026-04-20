@@ -16,7 +16,7 @@ export default {
     <tr>
       <th>{{ song.author }} - {{ song.title }} ({{ song.length }})</th>
       <th class="buttons">
-        <button class="addToPlaylistButton" @click="$emit('add-to-playlist')">
+        <button class="addToPlaylistButton" @click="$emit('add-to-playlist', song)">
           <i class="bi bi-chevron-right"/>
         </button>
       </th>

@@ -17,10 +17,10 @@ export default {
       this.$emit("up", this.musicId)
     },
     onDown() {
-      this.$emit("down", {id: this.musicId})
+      this.$emit("down", this.musicId)
     },
     onDelete() {
-      this.$emit("delete", {id: this.musicId})
+      this.$emit("delete", this.musicId)
     }
   },
   emits: ["up", "down", "delete"]
