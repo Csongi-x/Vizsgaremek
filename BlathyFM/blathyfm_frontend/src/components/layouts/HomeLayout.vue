@@ -1,41 +1,12 @@
 <script>
+import {http} from "@/utils/http.js";
+
 export default {
   name: 'HomeLayout',
   data() {
     return {
-      playedSongs: [ // EZEK PÉLDAADATOK! KIVENNI ŐKET, HA MEG LESZ OLDVA A BETÖLTÉS!
-        {
-          id: 1,
-          author: "Falco",
-          title: "Europa",
-          length: "5:08",
-          link: "https://www.youtube.com/watch?=..."
-        },
-        {
-          id: 2,
-          author: "Alphaville",
-          title: "Big in Japan",
-          length: "4:45",
-          link: "https://www.youtube.com/watch?=..."
-        }
-      ], // már lejátszott zenék
-
-      playlist: [
-        {
-          id: 1,
-          author: "Falco",
-          title: "Einzelhaft",
-          length: "4:01",
-          link: "https://www.youtube.com/watch?=..."
-        },
-        {
-          id: 2,
-          author: "C418",
-          title: "Haunt Muskie",
-          length: "6:02",
-          link: "https://www.youtube.com/watch?=..."
-        }
-      ], // lejátszandó zenék, az első lesz az, ami aktuálisan megy
+      playedSongs: [], // már lejátszott zenék
+      playlist: [] // lejátszandó zenék, az első lesz az, ami aktuálisan megy
     }
   },
   computed: {
@@ -50,12 +21,10 @@ export default {
     async loadData(){
       this.loading = true
       try{
-        const [playlist, playedlist] = await Promise.all([
-          axios.get('http://api/music'),
-          axios.get('http://api/playedlist')//Ezt még létre kell hozni a backendben
-        ])
-        this.playlist = playlist.data
-        this.playedSongs = playedlist.data
+        let response = await http.get('/api/playlist')
+        this.playlist = response.data.playlist
+        response = await http.get('/api/playedlist')
+        this.playedSongs = response.data.played_list
       }catch(e){
         this.error = e.message
       }finally{
@@ -73,7 +42,8 @@ export default {
   <section class="fm-container">
     <!--Baloldali kártya article-->
     <article class="card-container playlist-main">
-      <h2 class="title">{{`${this.actualSong.author} - ${this.actualSong.title}`}}</h2>
+      <h2 v-if="actualSong !== undefined" class="title">{{`${this.actualSong.author} - ${this.actualSong.title}`}}</h2>
+      <h2 v-else class="title">Az iskolarádió jelenleg nem üzemel.</h2>
       <ul>
         <li v-for="song in upcomingMusic" :key="song.id">
           {{song.author}} - {{song.title}} - ({{song.length}})
@@ -175,7 +145,9 @@ ul {
 }
 
 li {
-  padding: 2px 0;
+  padding: 2vh;
+  margin: 0 2vh 0 2vh;
+  border: 2px solid black;
 }
 
 p {
