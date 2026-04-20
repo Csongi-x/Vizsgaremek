@@ -65,7 +65,7 @@ export default {
             <th></th>
           </tr>
           </thead>
-          <tbody v-if="users.filter(u => u.status === 'pending') > 0">
+          <tbody v-if="users.filter(u => u.status === 'pending').length > 0">
           <NewUser :user="user" v-if="user.status === 'pending'" v-for="user in users" :key="user.id"
                    @accept-user="accept" @decline-user="decline"/>
           </tbody>
