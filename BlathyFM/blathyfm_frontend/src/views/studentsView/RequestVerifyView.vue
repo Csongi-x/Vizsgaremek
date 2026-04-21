@@ -10,6 +10,22 @@ export default {
     }
   },
   methods:{
+    async sendSong(){
+      console.log("Adat beküldése indul...", this.music.link);
+      this.loading = true
+      this.error = ''
+      try{
+        await http.post('/api/request', {
+          link: this.music.link,
+        });
+        alert('Sikeresen bekérve!');
+        this.$router.push('/student/home')
+      }catch(error){
+        this.error = error.message
+      }finally{
+        this.loading = false
+      }
+    },
     async loadMusicById(id) {
       try {
         const response = await http.get(`/api/music/${id}`)
@@ -18,9 +34,6 @@ export default {
         alert('Sajnos a zene nem kérhető le a szerver meghibásodása vagy leállása miatt.')
       }
     },
-    sendSong(){
-      this.$emit('request:song', {id: this.music.id, message: this.message})
-    }
   },
   mounted() {
     this.loadMusicById(this.$route.params.id)

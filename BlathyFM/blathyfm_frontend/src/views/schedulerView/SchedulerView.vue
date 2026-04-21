@@ -94,16 +94,9 @@ export default{
         return this.songs;
       }
       const query = this.searchQuery.toLowerCase();
-      let matched =[];
-      this.songs.forEach(song => {
-        const title = song.title.toLowerCase();
-        const author = song.author.toLowerCase();
-        if(title.includes(query) || author.includes(query)){
-          matched.push(song);
-        }
-      });
-      return matched
-    }
+
+      return this.songs.filter(song => song.title.toLowerCase().includes(query) || song.author.toLowerCase().includes(query));
+  },
   },
   mounted(){
     //itt hívom meg az adatlekérést hogy betöltse a songs tömböt
@@ -118,19 +111,21 @@ export default{
 <template>
   <section class="row px-5 m-2">
     <!--1. oszlop ami minden zene-->
-    <article class="col-12 col-md-6 col-lg-4"><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
+    <article class=" col-12 col-md-6 col-lg-4"><!-- itt azt nézze meg hogy be lett e kérve ez a zene-->
         <h1 class="h2 row">
           <span class="col-12 col-md-6 col-lg-6">
             Zenék
           </span>
           <span class="query col-12 col-md-6 col-lg-6 d-flex align-items-center">
             <i class="bi bi-search col-2"></i>
-            <input type="search" placeholder="search" v-model="searchQuery" class="fullBorder mw-100 col-10">
+            <!--Kereső mező-->
+
+            <input v-model="searchQuery"  type="search" placeholder="search" class="fullBorder mw-100 col-10">
           </span>
         </h1>
       <div class="allMusic">
         <Spinner v-if="loading"/>
-        <SchedulerMusicRow v-for="song in songs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
+        <SchedulerMusicRow v-for="song in filteredSongs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
       </div>
     </article>
 
@@ -141,7 +136,7 @@ export default{
       </h1>
       <div class="requestedMusic">
       <Spinner v-if="loading"/>
-      <SchedulerMusicRow v-for="song in filteredSongs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
+      <SchedulerMusicRow v-for="song in requestedSongs" :key="song.id" :song="song" @add-to-playlist="addMusicToPlaylist"/>
       </div>
     </article>
 
