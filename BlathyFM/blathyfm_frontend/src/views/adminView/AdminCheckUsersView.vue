@@ -22,7 +22,7 @@ export default {
       this.loading = true
       try {
         const response = await http.get('/api/pending_users')
-        this.users = response.data.pending_users
+        this.users = response.data.pending_users.filter(u => u.status === 'pending')
       } catch (error) {
         this.error = 'A regisztrálandó felhasználók adatai jelenleg sajnos nem kérhetőek le. Próbálkozzon később.'
       } finally {
@@ -56,7 +56,7 @@ export default {
             </th>
           </tr>
           <tr>
-            <th v-if="this.error !== ''" class="error">{{ error }}</th>
+            <th v-if="this.error" class="error">{{ error }}</th>
           </tr>
           <tr class="tr">
             <th>Teljes név</th>
@@ -65,8 +65,8 @@ export default {
             <th></th>
           </tr>
           </thead>
-          <tbody v-if="users.filter(u => u.status === 'pending') > 0">
-          <NewUser :user="user" v-if="user.status === 'pending'" v-for="user in users" :key="user.id"
+          <tbody v-if="users.length > 0">
+          <NewUser :user="user" v-for="user in users" :key="user.id"
                    @accept-user="accept" @decline-user="decline"/>
           </tbody>
           <tbody v-else>
