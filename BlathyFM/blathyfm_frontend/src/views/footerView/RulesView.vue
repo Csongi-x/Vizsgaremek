@@ -96,7 +96,7 @@ h1, ul {
   color: white;
 }
 h2 {
-  color: gold;
+  color: black;
 }
 ul {
   list-style-type: disc;

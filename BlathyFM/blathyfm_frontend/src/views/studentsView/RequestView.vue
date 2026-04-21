@@ -53,6 +53,12 @@ export default{
     },
     toLast() {
       this.pageNumber = this.maxPageNumber
+    },
+    send(){
+      this.$router.push({name: 'send'})
+    },
+    toPlaylist(){
+      this.$router.push({name: 'student-home'})
     }
   },
   mounted() {
@@ -98,8 +104,8 @@ export default{
       </div>
 
       <div class="slots">
-        <button class="menu-btn">Lejátszási lista megtekintése</button>
-        <button class="menu-btn active">Új zene bekérése</button>
+        <button class="menu-btn" @click="toPlaylist">Lejátszási lista megtekintése</button>
+        <button class="menu-btn active" @click="send">Új zene bekérése</button>
       </div>
     </aside>
   </section>

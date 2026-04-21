@@ -36,7 +36,7 @@ export default{
         <div class="errorPage" v-if="error !== ''"> <!-- Hibaüzenet -->
           <p>{{error}}</p>
         </div>
-        <form class="w-100 align-items-center">
+        <form class="w-100 align-items-center" @submit.prevent="register">
           <table>
             <tbody>
             <!--Teljes név-->
@@ -73,7 +73,7 @@ export default{
             </tbody>
           </table>
           <!--regisztráció-->
-          <button type="submit" @click="register">Regisztráció</button>
+          <button type="submit">Regisztráció</button>
         </form>
       </div>
     </div>

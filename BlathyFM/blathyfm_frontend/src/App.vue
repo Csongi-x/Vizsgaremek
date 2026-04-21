@@ -27,7 +27,7 @@ export default {
     login({email, password}) {
       this.email = email
       this.password = password
-      this.$router.push({name : 'waiting'})
+      this.$router.push({name : 'waiting'})//biztos ide kell?
     },
     check({email, password}) {
       // adatbázisban megnézi, hogy van-e egyezés, ha van, akkor onnan kinyeri a rangot (role),

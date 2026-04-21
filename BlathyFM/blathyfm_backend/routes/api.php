@@ -32,7 +32,7 @@ Route::post('/new_music', [AcceptableMusicController::class, 'store']);
 //Még egy Route a lejátszott számoknak -> api/playedlist
 //RequestedMusic route -» api/requestedMusic
 //playlist -» api/playlist
-
+Route::get('/request', [RequestedMusicController::class, 'index']);
 Route::post('/request', [RequestedMusicController::class, 'store']);
 Route::post('/accepted_music', [AcceptedMusicController::class, 'store']);
 

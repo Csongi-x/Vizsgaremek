@@ -23,7 +23,7 @@ export default{
   <div class="col-md-2 col-lg-4"></div>
   <div class="vertical col-12 col-sm-12 col-md-8 col-lg-4">
     <div class="loginPage">
-      <form class="w-100 align-items-center">
+      <form class="w-100 align-items-center"  @submit.prevent="auth">
         <table>
           <tbody>
           <!--Email cim-->
@@ -39,7 +39,7 @@ export default{
           </tbody>
         </table>
         <!--bejelentkezés-->
-        <button type="submit" @click="auth">Bejelentkezés</button>
+        <button type="submit">Bejelentkezés</button>
       </form>
     </div>
   </div>

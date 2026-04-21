@@ -46,7 +46,7 @@ export default {
       <h2 v-else class="title">Az iskolarádió jelenleg nem üzemel.</h2>
       <ul>
         <li v-for="song in upcomingMusic" :key="song.id">
-          {{song.author}} - {{song.title}} - ({{song.length}})
+          <strong>{{song.author}} - {{song.title}} - ({{song.length}})</strong>
         </li>
       </ul>
     </article>
@@ -61,7 +61,7 @@ export default {
       <h2 class="title">Lejátszott zenék</h2>
       <ul>
         <li v-for="song in playedSongs" :key="song.id">
-          {{song.author}} - {{song.title}} (<!-- amikor indult -->)
+          <strong>{{song.author}} - {{song.title}}</strong> (<!-- amikor indult -->)
         </li>
       </ul>
     </article>
@@ -106,7 +106,7 @@ export default {
 
 /*elemek elhelyezése*/
 .playlist-main {
-  grid-area: left;
+  //grid-area: left;
   display: flex;
   flex-direction: column;
 }

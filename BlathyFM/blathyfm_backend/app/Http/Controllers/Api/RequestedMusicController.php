@@ -8,7 +8,7 @@ use App\Models\RequestedMusic;
 class RequestedMusicController extends Controller
 {
     public function index(){
-        $requestedMusic = RequestedMusic::all();
+        $requestedMusic = \DB::table('requested_music')->join('music', 'requested_music.music_id', '=', 'music.id')->select('music.id', 'music.author', 'music.title', 'music.length', 'music.link')->get();
 
         return response()->json([
             "success" => true,
