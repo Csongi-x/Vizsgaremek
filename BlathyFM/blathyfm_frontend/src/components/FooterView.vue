@@ -12,7 +12,7 @@ export default defineComponent({
   <p class="whiteLine">
     <router-link class="a yellowLine" :to="{name: 'about'}">Impresszum</router-link> -
     <router-link class="a yellowLine" :to="{name: 'rules'}">Szabályzat</router-link> -
-    <router-link class="a yellowLine" :to="{name: 'howto'}">Hogy működik?</router-link> -
+    <router-link class="a yellowLine" :to="{name: 'howto'}">Hogyan működik?</router-link> -
     <router-link class="a yellowLine" :to="{name: 'technology'}">Technika</router-link>
   </p>
 

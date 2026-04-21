@@ -4,8 +4,6 @@ import RequestView from "@/views/studentsView/RequestView.vue";
 import {http} from '@/utils/http.js'
 import Spinner from "@/components/Spinner.vue";
 import PlaylistMusicRow from "@/components/music-row/PlaylistMusicRow.vue";
-import {searchForWorkspaceRoot} from "vite";
-
 //music, requestedMusic, playlist -» ezek kellenek
 export default{
   name: "SchedulerView",
@@ -21,7 +19,6 @@ export default{
     }
   },
   methods:{
-    searchForWorkspaceRoot,
     async fetchAllMusic(){
       this.loading = true
       this.error = '';

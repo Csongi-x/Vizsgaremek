@@ -28,7 +28,7 @@ export default {
         </ul>
       </dd>
     </dl>
-    <h2>Szoftverek</h2>
+    <h2>Szoftverek:</h2>
     <dl>
       <dt>PhpStorm</dt>
       <dd>
@@ -66,7 +66,10 @@ ul {
   background-color: transparent;
   list-style-type: disc;
 }
-h2, dt {
+dt {
   color: gold;
+}
+h2{
+  color: #0a0a0a;
 }
 </style>

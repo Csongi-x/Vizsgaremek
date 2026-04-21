@@ -106,7 +106,7 @@ export default {
 
 /*elemek elhelyezése*/
 .playlist-main {
-  grid-area: left;
+  //grid-area: left;
   display: flex;
   flex-direction: column;
 }

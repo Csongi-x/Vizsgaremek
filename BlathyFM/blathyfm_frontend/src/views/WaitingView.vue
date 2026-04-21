@@ -4,7 +4,8 @@ export default {
   data(){
     return{
       checking: false,
-      errorMsg: ''
+      errorMsg: '',
+      userStatus: ''
     }
   },
   methods: {
@@ -30,7 +31,7 @@ export default {
     },
     goToRegister(){
       localStorage.clear();
-      this.$router.push('/register');
+      this.$router.push({name: 'register'});
     }
   }
 }
@@ -46,7 +47,7 @@ export default {
         <p class="hint">Ez általában pár percet vesz igénybe tanítási időben.</p>
 
         <button @click="checkStatus" :disabled="checking" class="refresh-btn">
-          {{ loading ? 'Ellenőrzés...' : 'Státusz frissítése' }}
+          {{ checking ? 'Ellenőrzés...' : 'Státusz frissítése' }}
         </button>
       </div>
 
