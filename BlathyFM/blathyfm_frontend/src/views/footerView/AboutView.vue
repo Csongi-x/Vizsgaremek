@@ -64,7 +64,7 @@ export default {
 }
 ul {
   background-color: transparent;
-  list-style-type: disc;
+  list-style-type: none;
 }
 dt {
   color: gold;

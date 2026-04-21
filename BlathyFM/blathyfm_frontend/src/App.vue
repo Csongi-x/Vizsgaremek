@@ -119,5 +119,7 @@ main {
   text-align: center;
   color: white;
   font-weight: lighter;
+  background: transparent !important;
+  border: none !important;
 }
 </style>

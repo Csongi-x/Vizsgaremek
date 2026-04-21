@@ -5,6 +5,7 @@ export default {
   name: 'HomeLayout',
   data() {
     return {
+      loading: false,
       playedSongs: [], // már lejátszott zenék
       playlist: [] // lejátszandó zenék, az első lesz az, ami aktuálisan megy
     }
@@ -43,6 +44,7 @@ export default {
     <!--Baloldali kártya article-->
     <article class="card-container playlist-main">
       <h2 v-if="actualSong !== undefined" class="title">{{`${this.actualSong.author} - ${this.actualSong.title}`}}</h2>
+      <h2 v-else-if="loading" class="title">Betöltés...</h2>
       <h2 v-else class="title">Az iskolarádió jelenleg nem üzemel.</h2>
       <ul>
         <li v-for="song in upcomingMusic" :key="song.id">
@@ -61,7 +63,7 @@ export default {
       <h2 class="title">Lejátszott zenék</h2>
       <ul>
         <li v-for="song in playedSongs" :key="song.id">
-          <strong>{{song.author}} - {{song.title}}</strong> (<!-- amikor indult -->)
+          <strong>{{song.author}} - {{song.title}} (<!-- amikor indult -->)</strong>
         </li>
       </ul>
     </article>
@@ -91,7 +93,6 @@ export default {
   "right-top"
   "right-bottom";
     gap: 10px;
-    background-color: #333;
     padding: 10px;
     min-height: 100vh;
     color: black;
@@ -106,7 +107,7 @@ export default {
 
 /*elemek elhelyezése*/
 .playlist-main {
-  //grid-area: left;
+  grid-area: left;
   display: flex;
   flex-direction: column;
 }

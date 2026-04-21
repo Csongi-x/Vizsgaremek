@@ -8,12 +8,12 @@ export default defineComponent({
 
 <template>
 <nav class="navbar">
-  <h4>BláthyFM</h4>
+  <h1 class="h4">BláthyFM</h1>
 </nav>
 </template>
 
 <style scoped>
-/* padding módosítása 0.5remről 1remre, középre igazítás: Susán Csongor
+/* padding módosítása 0.5remről 1remre, középre igazítás, h4->h1: Susán Csongor
  minden más: El-Nabulsy Csongor */
 .navbar{
   justify-content: center !important;
