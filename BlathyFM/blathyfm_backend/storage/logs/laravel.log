@@ -3200,4 +3200,4 @@
 #48 C:/Users/susan/Desktop/Repositoryk/Vizsgaremek/BlathyFM/blathyfm_backend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate/Foundation/Console/Kernel->handle(Object(Symfony/Component/Console/Input/ArgvInput), Object(Symfony/Component/Console/Output/ConsoleOutput))
 #49 C:/Users/susan/Desktop/Repositoryk/Vizsgaremek/BlathyFM/blathyfm_backend/artisan(16): Illuminate/Foundation/Application->handleCommand(Object(Symfony/Component/Console/Input/ArgvInput))
 #50 {main}
-"} 
+"}
