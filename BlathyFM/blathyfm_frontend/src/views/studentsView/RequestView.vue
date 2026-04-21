@@ -2,10 +2,11 @@
 
 import {http} from "@/utils/http.js";
 import RequestableMusicRow from "@/components/music-row/RequestableMusicRow.vue";
+import Spinner from "@/components/Spinner.vue";
 
 export default{
   name: "RequestView",
-  components: {RequestableMusicRow},
+  components: {Spinner, RequestableMusicRow},
   data(){
     return{
       songs:[], //elérhető zenék
@@ -13,23 +14,37 @@ export default{
       query: '',
       loading: false,
       pageNumber: 1, // oldalszám
-      error: ''
+      error: '',
     }
   },
   computed: {
-    maxPageNumber() { // legmagasabb oldalszám
-      return Math.ceil(this.songs.length / 12)
+    maxPageNumber(){
+      const count = this.filteredSongs.length;
+      return count > 0 ? Math.ceil(count/12) : 1;
     },
     songsToDisplay() { // az oldalszámnak megfelelően jeleníti meg mindig a zenéket
-      if (this.songs.length === 0) return []
-      let songsToDisplay = []
-      const start = (this.pageNumber - 1) * 12
-      const end = start + 12
-      for (let x = start; x < end; x++) if(x < this.songs.length) songsToDisplay.push(this.songs[x])
-      return songsToDisplay
-    }
+      const start = (this.pageNumber - 1) * 12;
+      const end = start + 12;
+      // Itt a filteredSongs-ból vág
+      return this.filteredSongs.slice(start, end);
+    },
+    filteredSongs(){
+      if(!this.query){
+        return this.songs;
+      }
+      const q = this.query.toLowerCase();
+
+      return this.songs.filter(song => song.title.toLowerCase().includes(q) || song.author.toLowerCase().includes(q));
+    },
+
+
   },
   methods:{
+    watch: {
+      query(){
+        this.pageNumber = 1;
+      }
+    },
     async loadMusic() {
       this.loading = true
       this.error = ''
@@ -74,9 +89,10 @@ export default{
         <span class="search-icon">
           <i class="bi bi-search"/>
         </span>
-        <input v-model="query">
+        <input v-model="query"  type="search" placeholder="search" class="fullBorder mw-100 col-10">
       </h2>
       <div class="song-grid">
+        <Spinner v-if="loading"/>
         <RequestableMusicRow v-for="music in songsToDisplay" :key="music.id" :music="music"/>
       </div>
     </article>

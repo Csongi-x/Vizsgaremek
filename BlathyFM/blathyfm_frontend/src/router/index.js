@@ -135,16 +135,6 @@ const router = createRouter({
           roles: ['scheduler']
       }
   },
-  {
-      path: '/admin',
-      name: 'admin',
-      component: SchedulerAcceptMusicView,
-      meta: {
-          title: "Zenék ellenőrzése",
-          requiresAuth: true,
-          roles: ['admin']
-      }
-  },
       {
           path: '/admin/checkusers',
           name: 'admin-check-users',
