@@ -16,7 +16,7 @@ export default {
         <div class="col-md-4">
           <div class="step-card">
             <div class="step-num">1</div>
-            <h3>Keress és válassz</h3>
+            <h3>Keress és válassz!</h3>
             <p>Böngéssz az összes elérhető zene között, vagy használd a keresőt, hogy megtaláld a kedvenc előadódat.</p>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default {
         <div class="col-md-4">
           <div class="step-card">
             <div class="step-num">3</div>
-            <h3>Élvezd a zenét</h3>
+            <h3>Élvezd a zenét!</h3>
             <p>A rádiós csapat összeállítja a listát, te pedig a következő nagy szünetben már hallhatod is a választottad!</p>
           </div>
         </div>
