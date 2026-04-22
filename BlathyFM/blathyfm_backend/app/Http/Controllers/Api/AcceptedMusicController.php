@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcceptableMusic;
 use App\Models\Music;
 use App\Models\AcceptedMusic;
 use App\Models\Playlist;
@@ -20,24 +21,24 @@ class AcceptedMusicController extends Controller
         ]);
     }
     public function store(Request $request){
-        $acceptedMusicList = $request->input('music_list', []);
-
-        foreach($acceptedMusicList as $acceptedMusic){
-            $musicId = $acceptedMusic['music_id'];
-            $status = $acceptedMusic['status'];
-
-            $music = AcceptedMusic::find($musicId);
-            if($musicId){
-                $music->status = $status;
-                if($status == 'accepted'){
-                    AcceptedMusic::create($music->toArray());
-                }
-                else{
-                    $music->delete();
-                }
-            }
-            return response()->json(['status' => 'success', 'message' => 'Zene sikeresen feldolgozva!']);
+        $music = $request->all();
+        foreach($music as $song) {
+            AcceptedMusic::create([
+                "author" => $song['author'],
+                "title" => $song['title'],
+                "length" => $song['length'],
+                "link" => $song['link'],
+                "accepted" => $song['accepted']
+            ]);
+            AcceptableMusic::destroy($song);
+            if ($song['accepted']) Music::create($song);
         }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zenék sikeresen feldolgozva!',
+            'processed_music' => $music
+        ]);
     }
     public function delete($id){
         $music = Playlist::find($id);

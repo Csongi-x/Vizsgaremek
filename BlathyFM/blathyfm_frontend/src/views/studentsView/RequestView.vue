@@ -40,11 +40,6 @@ export default{
 
   },
   methods:{
-    watch: {
-      query(){
-        this.pageNumber = 1;
-      }
-    },
     async loadMusic() {
       this.loading = true
       this.error = ''
@@ -61,7 +56,7 @@ export default{
       this.pageNumber = 1
     },
     minusOne() {
-      if (this.pageNumber > 0) this.pageNumber--
+      if (this.pageNumber > 1) this.pageNumber--
     },
     plusOne() {
       if (this.pageNumber < this.maxPageNumber) this.pageNumber++
@@ -74,6 +69,11 @@ export default{
     },
     toPlaylist(){
       this.$router.push({name: 'student-home'})
+    }
+  },
+  watch: {
+    query() {
+      this.pageNumber = 1;
     }
   },
   mounted() {
@@ -89,7 +89,7 @@ export default{
         <span class="search-icon">
           <i class="bi bi-search"/>
         </span>
-        <input v-model="query"  type="search" placeholder="search" class="fullBorder mw-100 col-10">
+        <input v-model="query" type="search" class="fullBorder">
       </h2>
       <div class="song-grid">
         <Spinner v-if="loading"/>

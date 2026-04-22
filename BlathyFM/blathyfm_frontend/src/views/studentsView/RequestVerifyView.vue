@@ -6,24 +6,24 @@ export default {
   data(){
     return{
       music: {},
+      email: '10011010100101@blathy.info', // autentikáció még nincs megoldva, ha meg lesz, ezt javítsd ki!
       message: ''
     }
   },
   methods:{
     async sendSong(){
-      console.log("Adat beküldése indul...", this.music.link);
-      this.loading = true
-      this.error = ''
       try{
-        await http.post('/api/request', {
-          link: this.music.link,
-        });
+        const payload = {
+          email: this.email,
+          id: this.music.id,
+          message: this.message
+        }
+        console.log(payload)
+        await http.post('/api/request', payload)
         alert('Sikeresen bekérve!');
         this.$router.push('/student/home')
-      }catch(error){
-        this.error = error.message
-      }finally{
-        this.loading = false
+      } catch {
+        alert('A zenét sajnos szerverhiba miatt nem sikerült elküldeni.')
       }
     },
     async loadMusicById(id) {
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <template>
-  <section class="col-md-1 col-lg-3"/>
+  <section class="col-md-1 col-lg-3"></section>
     <section class="col-12 col-sm-12 col-md-10 col-lg-6 card-container send-form">
       <table>
         <tr>
@@ -62,7 +62,7 @@ export default {
       <textarea rows="6" v-model="message" placeholder="Üzenet (opcionális)"></textarea>
       <button class="title" @click="sendSong">Bekérés</button>
     </section>
-  <section class="col-md-1 col-lg-3"/>
+  <section class="col-md-1 col-lg-3"></section>
 </template>
 
 <style scoped>
@@ -79,6 +79,11 @@ export default {
 input, textarea {
   padding:6px;
   border: 2px solid black;
+}
+
+td {
+  text-align: left !important;
+  text-indent: .25vh;
 }
 
 .data {

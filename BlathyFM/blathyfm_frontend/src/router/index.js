@@ -100,7 +100,7 @@ const router = createRouter({
           name: 'request-verify',
           component: RequestVerifyView,
           meta:{
-              title: "RequestVerify",
+              title: "Kérés megerősítése",
               requiresAuth: true,
               roles: ['student']
           }
@@ -125,16 +125,26 @@ const router = createRouter({
           roles: ['student']
       }
   },
-  {
-      path: '/scheduler/schedule',
-      name: 'scheduler',
-      component: SchedulerView,
-      meta: {
-          title: "Ütemezés",
-          requiresAuth: true,
-          roles: ['scheduler']
-      }
-  },
+      {
+          path: '/scheduler/check',
+          name: 'scheduler-check',
+          component: SchedulerAcceptMusicView,
+          meta: {
+              title: "Ütemezés",
+              requiresAuth: true,
+              roles: ['scheduler']
+          }
+      },
+      {
+          path: '/scheduler/schedule',
+          name: 'scheduler',
+          component: SchedulerView,
+          meta: {
+              title: "Ütemezés",
+              requiresAuth: true,
+              roles: ['scheduler']
+          }
+      },
       {
           path: '/admin/checkusers',
           name: 'admin-check-users',

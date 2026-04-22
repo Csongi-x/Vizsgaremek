@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 class AcceptableMusicController extends Controller
 {
     public function index(){
-        $acceptableMusic = AcceptableMusic::all();
+        $acceptable_music = AcceptableMusic::all();
         return response()->json([
             "success" => true,
             "message" => "Elfogadás/elutasítás előtt álló zenék listája",
-            "acceptableMusic" => $acceptableMusic
+            "acceptable_music" => $acceptable_music
         ]);
     }
 

@@ -23,40 +23,47 @@ export default {
 </script>
 
 <template>
-<p>
-  {{ music.author }} - {{ music.title }} ({{ music.length }})
-  <span>
-    <button class="uploadButton" @click="onOpenLink">
-      <i class="bi bi-box-arrow-in-up-right"/>
-    </button>
-    <button class="acceptButton" @click="onAccept">
-      <i class="bi bi-check"/>
-    </button>
-    <button class="declineButton" @click="onDecline">
-      <i class="bi bi-x"/>
-    </button>
-  </span>
-</p>
+  <table>
+    <tr>
+      <th>{{ music.author }} - {{ music.title }} ({{ music.length }})</th>
+      <th class="th">
+        <button class="uploadButton" @click="onOpenLink">
+          <i class="bi bi-box-arrow-in-up-right"/>
+        </button>
+        <button class="acceptButton" @click="onAccept">
+          <i class="bi bi-check"/>
+        </button>
+        <button class="declineButton" @click="onDecline">
+          <i class="bi bi-x"/>
+        </button>
+      </th>
+    </tr>
+  </table>
 </template>
 
 <style scoped>
-p {
+table {
   border: 2px solid black;
   margin: 1vh;
   padding: 1vh;
 }
+th {
+  font-weight: normal !important;
+  padding: 1.25vh;
+}
+.th {
+  width: 18%;
+}
 button {
   border: 2px solid black;
-  width: 1.5rem;
-  height: 1.5rem;
 }
 .uploadButton {
   background-color: #89DBFE;
 }
 .acceptButton {
-  background-color: #8F8;
+  background-color: #9F2;
 }
 .declineButton {
-  background-color: #DDA577;
+  background-color: #FA7;
 }
 </style>

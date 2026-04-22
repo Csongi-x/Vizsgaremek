@@ -43,7 +43,8 @@ export default{
       }finally{
         this.loading = false;
       }
-    },async fetchPlaylist(){
+    },
+    async fetchPlaylist(){
       this.loading = true
       this.error = '';
       try{

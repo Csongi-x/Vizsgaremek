@@ -12,7 +12,7 @@ export default{
       this.$router.push({name: 'scheduler'})
     },
     acceptOrDecline() {
-      this.$router.push({name: 'admin'})
+      this.$router.push({name: 'scheduler-check'})
     }
   },
 }
