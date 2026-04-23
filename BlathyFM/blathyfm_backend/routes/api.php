@@ -14,7 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // amihez token kell
 });
 
-Route::post('login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [PendingUserController::class, 'create']);
 
 Route::get('/pending_users', [PendingUserController::class, 'index']);
@@ -25,6 +25,7 @@ Route::get('/music/{id}', [MusicController::class, 'show']);
 Route::get('/music', [MusicController::class, 'index']);
 
 Route::get('/playlist', [PlaylistController::class, 'index']);
+Route::put('/playlist', [PlaylistController::class, 'update']);
 Route::get('/playedlist', [PlayedListController::class, 'index']);
 
 Route::get('/accepted_music', [AcceptedMusicController::class, 'index']);
