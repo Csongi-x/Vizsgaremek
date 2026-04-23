@@ -100,7 +100,7 @@ export default {
 article {
   border: 2px solid black;
   height: 85vh;
-  width: 88vh;
+  width: 66.67vh;
   margin: .33vh;
   background-color: white;
   padding: 0;
@@ -108,7 +108,8 @@ article {
 
 .musicList {
   height: 74.33vh;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   border-bottom: 1px solid black;
 }
 

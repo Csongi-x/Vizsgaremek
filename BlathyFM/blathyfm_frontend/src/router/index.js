@@ -42,7 +42,7 @@ const router = createRouter({
               meta: {
                   title: "Főoldal",
                   requiresAuth: true,
-                  roles: ['student']
+                  role: 'student'
               }
           },
           {
@@ -52,7 +52,7 @@ const router = createRouter({
               meta: {
                   title: "Főoldal",
                   requiresAuth: true,
-                  roles: ['admin']
+                  role: 'admin'
               }
           },
           {
@@ -62,7 +62,7 @@ const router = createRouter({
               meta: {
                   title: "Főoldal",
                   requiresAuth: true,
-                  roles: ['scheduler']
+                  role: 'scheduler'
               }
           }
       ]
@@ -102,7 +102,7 @@ const router = createRouter({
           meta:{
               title: "Kérés megerősítése",
               requiresAuth: true,
-              roles: ['student']
+              role: 'student'
           }
       },
     { // Tanulói nézetek (nem ugyanolyan struktúrájúak, éppen ezért nem lesz gyerek komponensezés!)
@@ -112,7 +112,7 @@ const router = createRouter({
         meta: {
           title: "Kérés",
           requiresAuth: true,
-          roles: ['student']
+          role: 'student'
         }
     },
   {
@@ -122,7 +122,7 @@ const router = createRouter({
       meta: {
           title: "Küldés",
           requiresAuth: true,
-          roles: ['student']
+          role: 'student'
       }
   },
       {
@@ -132,7 +132,7 @@ const router = createRouter({
           meta: {
               title: "Ütemezés",
               requiresAuth: true,
-              roles: ['scheduler']
+              role: 'scheduler'
           }
       },
       {
@@ -142,7 +142,7 @@ const router = createRouter({
           meta: {
               title: "Ütemezés",
               requiresAuth: true,
-              roles: ['scheduler']
+              role: 'scheduler'
           }
       },
       {
@@ -152,7 +152,7 @@ const router = createRouter({
           meta: {
               title: 'Új felhasználók regisztráltatása',
               requiresAuth: true,
-              roles: ['admin']
+              role: 'admin'
           }
       },
       {

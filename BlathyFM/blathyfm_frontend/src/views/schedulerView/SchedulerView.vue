@@ -65,7 +65,17 @@ export default {
         alert("Ez a zene már szerepel a listán");
       }
     },
-
+    async savePlaylist() {
+      try {
+        const playlist = this.playlistSongs
+        await http.put('/api/playlist', playlist)
+      } catch {
+        alert('A lejátszási lista sajnos jelenleg nem rendezhető.')
+      }
+    },
+    message(message) {
+      alert(message)
+    },
     up(id) {
       const index = this.playlistSongs.findIndex(song => song.id === id);
       if (index > 0) {
@@ -106,13 +116,16 @@ export default {
                 song.author?.toLowerCase().includes(query)
             );
           });
+    },
+    filteredRequested() {
+      return this.requestedSongs.filter(m => !this.isInPlaylist(m.id))
     }
   },
   async mounted() {
     this.loading = true;
     await this.fetchAllMusic();
     await this.fetchSentMusic();
-    //await this.fetchPlaylist();
+    await this.fetchPlaylist();
     this.loading = false;
 
     //console.log("songs:", this.songs);
@@ -130,19 +143,14 @@ export default {
         <span class="col-6">Zenék</span>
         <span class="query col-6 d-flex align-items-center">
           <i class="bi bi-search col-2"></i>
-          <input
-              v-model="searchQuery"
-              type="search"
-              placeholder="search"
-              class="fullBorder col-10"
-          />
+          <input v-model="searchQuery" type="search" class="fullBorder col-10">
         </span>
       </h1>
       <div class="allMusic">
         <Spinner v-if="loading" />
         <SchedulerMusicRow
             v-for="song in filteredSongs"
-            :key="'song-' + song.id"
+            :key="song.id"
             :song="song"
             :disabled="isInPlaylist(song.id)"
             @add-to-playlist="addMusicToPlaylist"
@@ -156,10 +164,11 @@ export default {
       <div class="requestedMusic">
         <Spinner v-if="loading" />
         <SchedulerMusicRow
-            v-for="song in requestedSongs"
-            :key="'req-' + song.id"
+            v-for="song in filteredRequested"
+            :key="song.id"
             :song="song"
             :disabled="isInPlaylist(song.id)"
+            @message="message"
             @add-to-playlist="addMusicToPlaylist"
         />
       </div>
@@ -173,7 +182,7 @@ export default {
       <div class="playistScroll">
         <PlaylistMusicRow
             v-for="music in playlistSongs"
-            :key="'pl-' + music.id"
+            :key="music.id"
             :music="music"
             @up="up"
             @down="down"

@@ -7,7 +7,7 @@ export default {
       type: Object
     }
   },
-  emits: ["add-to-playlist"]
+  emits: ["add-to-playlist", "message"]
 }
 </script>
 
@@ -15,7 +15,10 @@ export default {
   <table>
     <tr>
       <th>{{ song.author }} - {{ song.title }} ({{ song.length }})</th>
-      <th class="buttons">
+      <th class="buttons" :class="song.message !== undefined ? 'wider' : ''">
+        <button class="message" v-if="song.message !== undefined && song.message !== null" @click="$emit('message', song.message)">
+          <i class="bi bi-chat"/>
+        </button>
         <button class="addToPlaylistButton" @click="$emit('add-to-playlist', song)">
           <i class="bi bi-chevron-right"/>
         </button>
@@ -37,10 +40,16 @@ th {
 .buttons {
   width: 15%;
 }
-.addToPlaylistButton {
+.wider {
+  width: 25% !important;
+}
+.addToPlaylistButton, .message {
   background-color: gold;
   border: 2px solid black;
   margin: .5vh;
   padding: .5vh;
+}
+.message {
+  background-color: #89DBFE;
 }
 </style>

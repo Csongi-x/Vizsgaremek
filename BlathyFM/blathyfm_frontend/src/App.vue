@@ -24,14 +24,19 @@ export default {
     }
   },
   methods: {
-    login({email, password}) {
-      this.email = email
-      this.password = password
-      this.$router.push({name : 'waiting'})//biztos ide kell?
-    },
-    check({email, password}) {
-      // adatbázisban megnézi, hogy van-e egyezés, ha van, akkor onnan kinyeri a rangot (role),
-      // ha nem, akkor hibaüzenetre készteti majd az appot
+    async login({email, password}) {
+      this.error = ''
+      try {
+        const response = await http.post('/api/login', {email, password})
+        if (response.data.success) {
+          this.email = response.data.user
+          this.password = response.data.user.password
+          this.role = response.data.user.role
+          this.$router.push({name: `${this.role}-home`})
+        }
+      } catch {
+        alert('A bejelentkezés sikertelen volt: nem létező fiók vagy érvénytelen e-mail cím/jelszó.')
+      }
     },
     async register({fullName, email, password, passwordAgain, role, status}) { // regisztráció (adminnak beküldeni a fiókot)
       let response = null

@@ -22,8 +22,9 @@ export default{
 <section class="row align-items-center">
   <div class="col-md-2 col-lg-4"></div>
   <div class="vertical col-12 col-sm-12 col-md-8 col-lg-4">
+
     <div class="loginPage">
-      <form class="w-100 align-items-center"  @submit.prevent="auth">
+      <form class="w-100 align-items-center" @submit.prevent="auth">
         <table>
           <tbody>
           <!--Email cim-->
