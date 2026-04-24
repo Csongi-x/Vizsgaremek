@@ -4,8 +4,6 @@
 1. Susán Csongor György
 2. El-Nabulsy Csongor Alan
 
-Dokumentáció kiegészítése
--EZ KERÜLJÖN A DOKUMENTUM ELEJÉRE!
 E-mail címek és jelszavak a projekt teszteléséhez:
 
 Diák	:   - E-mail: susan.csongor.gyorgy@blathy.info
