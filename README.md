@@ -53,12 +53,12 @@
 
 #### BlathyFM mappa szerkezete Frontend része
 - blathyfm_frontend/
-- Komponensek/
+- Komponensek(components)/
   - layouts/
   - music-row/
-- Routerek/
+- Routerek(routes)/
 - Utils/
-- Nézetek/
+- Nézetek(views)/
   - Admin nézetek/
   - Hiba nézetek/
   - Lábjegyzet nézetek/
