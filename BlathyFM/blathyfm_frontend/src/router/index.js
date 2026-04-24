@@ -211,10 +211,27 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    document.title = `${to.meta.title} - BláthyFM`
-    // autentikáció
-    if (!App.computed.isAuth() && to.meta.requiresAuth) next({name: 'forbidden'})
-    else next()
-})
+    // 1. Cím beállítása
+    document.title = `${to.meta.title ?? ''} - BláthyFM`
+
+    // 2. Adatok kinyerése a tárolóból
+    const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem('role'); // 'admin', 'scheduler', vagy 'student'
+
+    // 3. Autentikáció ellenőrzése
+    if (to.meta.requiresAuth && !token) {
+        // Ha kellene login, de nincs token -> Irány a bejelentkezés
+        return next({ name: 'login' });
+    }
+
+    // 4. Jogosultság (Role) ellenőrzése
+    if (to.meta.role && to.meta.role !== userRole) {
+        // Ha be van lépve, de rossz a rangja (pl. diák admin oldalra akar menni)
+        return next({ name: 'forbidden' });
+    }
+
+    // Ha minden feltétel teljesül
+    next();
+});
 
 export default router

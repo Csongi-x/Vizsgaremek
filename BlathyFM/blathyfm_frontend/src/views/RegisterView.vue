@@ -22,6 +22,10 @@ export default{
         role: this.role,
         status: 'pending'
       })
+    },
+    toggle() {
+      document.querySelector('[name="password"]').type = document.querySelector('[name="password"]').type === 'password' ? 'text' : 'password'
+      document.querySelector('[name="passwordAgain"]').type = document.querySelector('[name="passwordAgain"]').type === 'password' ? 'text' : 'password'
     }
   },
   emits: ["register"]
@@ -42,27 +46,32 @@ export default{
             <!--Teljes név-->
             <tr>
               <td class="label">Teljes név: </td>
-              <td class="input"><input name="full_name" id="full_name" v-model="fullName" required></td>
+              <td class="input" colspan="2"><input name="full_name" id="full_name" v-model="fullName" required></td>
             </tr>
             <!--Email cím-->
             <tr>
               <td class="label">E-mail cím: </td>
-              <td class="input"><input type="email" name="email" id="email" v-model="email" required></td>
+              <td class="input" colspan="2"><input type="email" name="email" id="email" v-model="email" required></td>
             </tr>
             <!--Jelszó-->
             <tr>
               <td class="label">Jelszó:</td>
               <td class="input"><input type="password" name="password" id="password" v-model="password" required></td>
+              <td rowspan="2">
+                <button type="button" class="toggle" @click="toggle">
+                  <i class="bi bi-eye"/>
+                </button>
+              </td>
             </tr>
             <!--Jelszó ismét-->
             <tr>
               <td class="label">Jelszó ismét:</td>
-              <td class="input"><input type="password" name="password" id="password" v-model="passwordAgain" required></td>
+              <td class="input"><input type="password" name="passwordAgain" id="passwordAgain" v-model="passwordAgain" required></td>
             </tr>
             <!--Role (lista)-->
             <tr>
               <td class="label">Jogkör:</td>
-              <td class="input">
+              <td class="input" colspan="2">
                 <select name="role" id="role" v-model="role">
                   <option value="student" selected>Diák</option>
                   <option value="admin">Adminisztrátor</option>
@@ -83,6 +92,10 @@ export default{
 
 <style scoped>
 /* Származtatta a LoginView-ból: Susán Csongor */
+.toggle {
+  background-color: aquamarine;
+  border: 2px solid black;
+}
 .loginPage{
   background-color: gold;
   margin: auto;

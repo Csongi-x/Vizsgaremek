@@ -52,7 +52,7 @@ class PendingUserController extends Controller
         PendingUser::create($pendingUser);
         return response()->json([
             "success" => true,
-            "message" => "User added successfully.",
+            "message" => "Felhasználó sikeresen hozzáadva a várólistához!",
             "user" => $pendingUser
         ], 201);
     }
@@ -71,19 +71,24 @@ class PendingUserController extends Controller
                 "message" => "Hiba: A felhasználót nem találja a rendszer. ($e)"
             ], 404);
         }
-        $user->status = "accepted";
+        $user->status = $request->status;
         $user->update();
-        User::create(
-            [
-                "full_name" => $user->full_name,
-                "email" => $user->email,
-                "role" => $user->role,
-                "password" => Hash::make($user->password)
-            ]
-        );
+        $m = "hozzáadva";
+        if ($user->status == 'accepted') {
+            User::create(
+                [
+                    "full_name" => $user->full_name,
+                    "email" => $user->email,
+                    "role" => $user->role,
+                    "password" => Hash::make($user->password)
+                ]
+            );
+        } else {
+            $m = "elutasítva";
+        }
         return response()->json([
             "success" => true,
-            "message" => "Felhasználó sikeresen hozzáadva!",
+            "message" => "Felhasználó sikeresen $m!",
             "user" => $user
         ], 201);
     }

@@ -17,6 +17,10 @@ export default {
     }
   },
   methods: {
+    async reload(id) {
+      const response = await http.get('/api/pending_users')
+      this.users = response.data.pending_users.filter(u => u.status === 'pending' && u.id !== id)
+    },
     async loadUsers() {
       this.error = ''
       this.loading = true
@@ -29,10 +33,12 @@ export default {
         this.loading = false
       }
     },
-    accept(id) {
+    async accept(id) {
+      await this.reload(id)
       this.$emit('accept', id)
     },
-    decline(id) {
+    async decline(id) {
+      await this.reload(id)
       this.$emit('decline', id)
     }
   },

@@ -24,20 +24,6 @@ export default {
     }
   },
   methods: {
-    async login({email, password}) {
-      this.error = ''
-      try {
-        const response = await http.post('/api/login', {email, password})
-        if (response.data.success) {
-          this.email = response.data.user
-          this.password = response.data.user.password
-          this.role = response.data.user.role
-          this.$router.push({name: `${this.role}-home`})
-        }
-      } catch {
-        alert('A bejelentkezés sikertelen volt: nem létező fiók vagy érvénytelen e-mail cím/jelszó.')
-      }
-    },
     async register({fullName, email, password, passwordAgain, role, status}) { // regisztráció (adminnak beküldeni a fiókot)
       let response = null
       try {
@@ -64,7 +50,7 @@ export default {
     },
     async acceptUser(id) {
       try {
-        const response = await http.post('/api/pending_users', {id: id})
+        const response = await http.post('/api/pending_users', {id: id, status: 'accepted'})
         alert(response.data.message)
       } catch (error) {
         alert(`Hiba: ${error}`)
@@ -72,7 +58,7 @@ export default {
     },
     async declineUser(id) {
       try {
-        const response = await http.patch('/api/pending_users', {id: id, status: 'declined'})
+        const response = await http.patch('/api/pending_users', {id: id, status: 'rejected'})
         alert(response.data.message)
       } catch (error) {
         alert(`Hiba: ${error}`)
@@ -88,7 +74,7 @@ export default {
     <NavBar/>
   </header>
   <main class="container">
-    <router-view @login="login" @register="register" @send="send"
+    <router-view @register="register" @send="send"
                  @accept="acceptUser" @decline="declineUser"
                  :email="email" :password="password" :role="role"/>
   </main>
