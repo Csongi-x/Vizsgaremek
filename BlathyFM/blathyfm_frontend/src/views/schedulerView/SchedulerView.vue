@@ -4,6 +4,7 @@ import RequestView from "@/views/studentsView/RequestView.vue";
 import PlaylistMusicRow from "@/components/music-row/PlaylistMusicRow.vue";
 import Spinner from "@/components/Spinner.vue";
 import { http } from "@/utils/http.js";
+import {toSecondHour, toTime} from "@/utils/timing.js";
 
 export default {
   name: "SchedulerView",
@@ -20,7 +21,9 @@ export default {
       requestedSongs: [],
       loading: false,
       error: "",
-      searchQuery: ""
+      searchQuery: "",
+      actualTime: "9:40", // ez is teszt
+      actualTimeSeconds: 0
     };
   },
   methods: {
@@ -65,14 +68,6 @@ export default {
         alert("Ez a zene már szerepel a listán");
       }
     },
-    async savePlaylist() {
-      try {
-        const playlist = this.playlistSongs
-        await http.put('/api/playlist', playlist)
-      } catch {
-        alert('A lejátszási lista sajnos jelenleg nem rendezhető.')
-      }
-    },
     message(message) {
       alert(message)
     },
@@ -100,6 +95,19 @@ export default {
       return this.playlistSongs.some(
           item => Number(item.id) === Number(songId)
       );
+    },
+    async updatePlaylist() {
+      const playlist = this.playlistSongs
+      try {
+        const response = await http.put('/api/playlist', playlist)
+        this.playlistSongs = response.data.playlist
+      } catch {
+        alert('A lejátszási lista sajnos szerverhiba miatt nem frissíthető.')
+      }
+    },
+    updateTime(id) {
+      this.actualTimeSeconds += this.playlistSongs.find(m => m.id === id).length
+      this.actualTime = toTime(this.actualTimeSeconds)
     }
   },
   computed: {
@@ -126,6 +134,7 @@ export default {
     await this.fetchAllMusic();
     await this.fetchSentMusic();
     await this.fetchPlaylist();
+    this.actualTimeSeconds = toSecondHour(this.actualTime)
     this.loading = false;
 
     //console.log("songs:", this.songs);
@@ -179,14 +188,17 @@ export default {
       <div v-if="playlistSongs.length === 0">
         <strong>A lejátszási lista üres!</strong>
       </div>
-      <div class="playistScroll">
+      <div class="playlistScroll">
         <PlaylistMusicRow
             v-for="music in playlistSongs"
             :key="music.id"
+            :actualTime="actualTime"
+            @update:time="updateTime"
             :music="music"
             @up="up"
             @down="down"
             @delete="deleteFromPlaylist"
+            @update:playlist="updatePlaylist"
         />
       </div>
     </article>
@@ -201,8 +213,7 @@ article {
   display: flex;
   flex-direction: column;
 }
-.allMusic,
-.requestedMusic {
+.allMusic, .requestedMusic {
   overflow: scroll;
   height: 75vh;
 }
@@ -222,7 +233,7 @@ i::before {
 input {
   height: 90%;
 }
-.playistScroll{
+.playlistScroll{
   overflow-y: auto;
   max-height: 75vh;
   padding-right: 5px;

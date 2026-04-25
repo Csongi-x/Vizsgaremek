@@ -15,15 +15,21 @@ export default {
   methods: {
     onUp() {
       this.$emit("up", this.musicId)
+      this.$emit("update:playlist")
     },
     onDown() {
       this.$emit("down", this.musicId)
+      this.$emit("update:playlist")
     },
     onDelete() {
       this.$emit("delete", this.musicId)
+      this.$emit("update:playlist")
     }
   },
-  emits: ["up", "down", "delete"]
+  mounted() {
+    this.$emit("update:time", this.musicId)
+  },
+  emits: ["up", "down", "delete", "update:playlist", "update:time"]
 }
 </script>
 
@@ -31,7 +37,7 @@ export default {
   <table>
     <tr>
       <th>{{ music.author }} - {{ music.title }} ({{ music.length }})</th>
-      <th>
+      <th class="buttons">
         <button class="upButton" @click="onDown">
           <i class="bi bi-chevron-down"/>
         </button>
@@ -65,5 +71,8 @@ button {
 }
 .deleteButton {
   background-color: #DDA577;
+}
+.buttons {
+  width: 20%;
 }
 </style>

@@ -1,13 +1,18 @@
 <script>
 import {http} from "@/utils/http.js";
+import {toSecond, toSecondHour, toTime} from "@/utils/timing.js";
+import HomePageMusicRow from "@/components/music-row/HomePageMusicRow.vue";
 
 export default {
   name: 'HomeLayout',
+  components: {HomePageMusicRow},
   data() {
     return {
       loading: false,
       playedSongs: [], // már lejátszott zenék
-      playlist: [] // lejátszandó zenék, az első lesz az, ami aktuálisan megy
+      playlist: [], // lejátszandó zenék, az első lesz az, ami aktuálisan megy
+      actualAppointment: "9:40", // teszt arra, hogy az indulás kiszámítása működik-e
+      actualTime: 0
     }
   },
   computed: {
@@ -19,6 +24,10 @@ export default {
     }
   },
   methods:{
+    persist(id) {
+      this.actualTime += toSecond(this.playlist.find(s => s.id === id).length)
+      this.actualAppointment = toTime(this.actualTime)
+    },
     async loadData(){
       this.loading = true
       try{
@@ -35,6 +44,7 @@ export default {
   },
   async mounted(){
     this.loadData()
+    this.actualTime = toSecondHour(this.actualAppointment)
   }
 }
 </script>
@@ -47,9 +57,8 @@ export default {
       <h2 v-else-if="loading" class="title">Betöltés...</h2>
       <h2 v-else class="title">Az iskolarádió jelenleg nem üzemel.</h2>
       <ul>
-        <li v-for="song in upcomingMusic" :key="song.id">
-          <strong>{{song.author}} - {{song.title}} - ({{song.length}})</strong>
-        </li>
+        <HomePageMusicRow @update:time="persist" :song="song" v-for="song in upcomingMusic"
+                          :key="song.id" :actualAppointment="actualAppointment"/>
       </ul>
     </article>
 
