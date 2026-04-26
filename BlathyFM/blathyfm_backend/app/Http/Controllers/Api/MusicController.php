@@ -14,7 +14,8 @@ class MusicController extends Controller
 
         // Csak a linkeket gyűjtjük ki egy egyszerű tömbbe
         $excludedLinks = RequestedMusic::pluck('link')
-            ->union(Playlist::pluck('link'))
+            ->merge(Playlist::pluck('link'))
+            ->unique()
             ->toArray();
 
         // Kiszűrjük azokat, amiknek a linkje benne van a tiltólistában
@@ -24,6 +25,7 @@ class MusicController extends Controller
 
         return response()->json([
             "success" => true,
+            "message" => "Zenék",
             "musicJson" => $musicJson
         ]);
     }

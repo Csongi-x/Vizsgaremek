@@ -11,15 +11,10 @@ use Illuminate\Support\Facades\DB;
 class RequestedMusicController extends Controller
 {
     public function index(){
-        $requestedMusic = DB::table('requested_music')
-            ->join('music', 'requested_music.link', '=', 'music.link')
-            ->select('music.id', 'music.author', 'music.title', 'music.length', 'music.link')
-            ->get();
-
         return response()->json([
             "success" => true,
-            "message" => "List of requested music",
-            "requested_music" => $requestedMusic
+            "message" => "Bekért zenék",
+            "requested_music" => RequestedMusic::all()
         ]);
     }
 
@@ -31,14 +26,13 @@ class RequestedMusicController extends Controller
         $email = $request->email;
         $musicId = $request->id;
         $music = Music::find($musicId);
-        $message = $request->message;
         $requested = [
             'email' => $email,
             'author' => $music->author,
             'title' => $music->title,
             'length' => $music->length,
             'link' => $music->link,
-            'message' => $message
+            'message' => $request->message
         ];
 
         RequestedMusic::create($requested);

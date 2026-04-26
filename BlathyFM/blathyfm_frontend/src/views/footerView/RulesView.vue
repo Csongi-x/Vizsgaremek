@@ -104,5 +104,6 @@ ul {
 }
 li {
   margin-bottom: 3vh;
+  list-style-type: none;
 }
 </style>

@@ -44,7 +44,7 @@ th {
 .buttons {
   width: 20%;
 }
-button, .requestAdd {
+.requestLink, .requestAdd {
   border: 1px solid black;
   color: black;
   width: 30%;

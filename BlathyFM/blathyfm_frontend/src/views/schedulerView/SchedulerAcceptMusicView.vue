@@ -74,7 +74,7 @@ export default {
 
 <template>
 <section class="row">
-  <article class="col-12 col-sm-12 col-lg-6 col-xl-6">
+  <article class="col-12 col-sm-12 col-lg-6 col-xl-6 mx-1 g-0">
     <div class="list-group list-group-flush">
       <Spinner v-if="loading"/>
       <div class="musicGrid">
@@ -83,7 +83,7 @@ export default {
       </div>
     </div>
   </article>
-  <article class="col-12 col-sm-12 col-lg-6 col-xl-6">
+  <article class="col-12 col-sm-12 col-lg-6 col-xl-6 mx-1 g-0">
     <div class="musicList">
         <SavableMusicRow v-for="music in savableMusic" :key="music.id" :music="music"/>
     </div>
@@ -99,11 +99,9 @@ export default {
 /* Készítette: Susán Csongor */
 article {
   border: 2px solid black;
+  width: 87vh;
   height: 85vh;
-  width: 66.67vh;
-  margin: .33vh;
   background-color: white;
-  padding: 0;
 }
 
 .musicList {

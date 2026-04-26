@@ -69,6 +69,9 @@ export default{
     },
     toPlaylist(){
       this.$router.push({name: 'student-home'})
+    },
+    beforeAccept() {
+      this.$router.push({name: 'before-accept'})
     }
   },
   watch: {
@@ -122,6 +125,7 @@ export default{
       <div class="slots">
         <button class="menu-btn" @click="toPlaylist">Lejátszási lista megtekintése</button>
         <button class="menu-btn active" @click="send">Új zene bekérése</button>
+        <button class="menu-btn active" @click="beforeAccept">Ellenőrzés előtt álló zenék megtekintése</button>
       </div>
     </aside>
   </section>

@@ -58,7 +58,7 @@ export default {
     </dl>
     <h2>Dokumentáció</h2>
     <dl>
-      <dt>Az alkalmazás dokumentációjához használt szoftverek</dt>
+      <dt>Az alkalmazás dokumentációjaihoz használt szoftverek</dt>
       <dd>
         <ul>
           <li>Microsoft Word (hivatalos)</li>

@@ -18,8 +18,19 @@ class PlaylistController extends Controller
     }
 
     public function update(Request $request) {
-        foreach (Playlist::all() as $element) Playlist::delete($element);
-        foreach ($request->all() as $newElement) Playlist::create($newElement);
+        Playlist::truncate();
+        $order_number = 0;
+        foreach ($request->all() as $newElement) {
+            $order_number++;
+            $e = [
+                'order_number' => $order_number,
+                'author' => $newElement['author'],
+                'title' => $newElement['title'],
+                'length' => $newElement['length'],
+                'link' => $newElement['link']
+            ];
+            Playlist::create($e);
+        }
         return response()->json([
             "success" => true,
             "message" => "Lejátszási lista frissítve",

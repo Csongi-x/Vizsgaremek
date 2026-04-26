@@ -50,7 +50,7 @@ export default {
     async fetchPlaylist() {
       try {
         const response = await http.get("api/playlist");
-        this.playlistSongs = response.data.playlist || [];
+        this.playlistSongs = response.data.playlist;
       } catch (error) {
         this.error = error.message;
       }finally{
@@ -99,6 +99,7 @@ export default {
     async updatePlaylist() {
       const playlist = this.playlistSongs
       try {
+        console.log(playlist)
         const response = await http.put('/api/playlist', playlist)
         this.playlistSongs = response.data.playlist
       } catch {
@@ -134,7 +135,8 @@ export default {
     await this.fetchAllMusic();
     await this.fetchSentMusic();
     await this.fetchPlaylist();
-    this.actualTimeSeconds = toSecondHour(this.actualTime)
+    const clock = this.actualTime
+    this.actualTimeSeconds = toSecondHour(clock)
     this.loading = false;
 
     //console.log("songs:", this.songs);
@@ -146,8 +148,9 @@ export default {
 
 <template>
   <section class="row px-5 m-2">
+
     <!-- 1. Minden zene oszlop -->
-    <article class="col-12 col-md-6 col-lg-4">
+    <article class="col-12 col-md-6 col-lg-4 mx-1">
       <h1 class="h2 row">
         <span class="col-6">Zenék</span>
         <span class="query col-6 d-flex align-items-center">
@@ -163,12 +166,13 @@ export default {
             :song="song"
             :disabled="isInPlaylist(song.id)"
             @add-to-playlist="addMusicToPlaylist"
+            @update:playlist="updatePlaylist"
         />
       </div>
     </article>
 
     <!-- 2. Bekért zenék oszlop-->
-    <article class="requestedMusic col-12 col-md-6 col-lg-4">
+    <article class="requestedMusic col-12 col-md-6 col-lg-4 g-0 mx-1">
       <h1 class="h2">Bekért zenék</h1>
       <div class="requestedMusic">
         <Spinner v-if="loading" />
@@ -179,11 +183,13 @@ export default {
             :disabled="isInPlaylist(song.id)"
             @message="message"
             @add-to-playlist="addMusicToPlaylist"
+            @update:playlist="updatePlaylist"
         />
       </div>
     </article>
+
     <!-- 3. Playlist oszlop-->
-    <article class="col-12 col-md-6 col-lg-4">
+    <article class="col-12 col-md-6 col-lg-4 g-0 mx-1">
       <h1 class="h2">Lejátszási lista</h1>
       <div v-if="playlistSongs.length === 0">
         <strong>A lejátszási lista üres!</strong>
@@ -234,7 +240,8 @@ input {
   height: 90%;
 }
 .playlistScroll{
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   max-height: 75vh;
   padding-right: 5px;
 }

@@ -16,6 +16,7 @@ export default {
           <li>Alapvető logika kidolgozása</li>
           <li>Adatbázis megtervezése</li>
           <li>Kód, dokumentáció írása</li>
+          <li>Időközben felmerülő hibák kijavítása</li>
         </ul>
       </dd>
       <dt>El-Nabulsy Csongor Alan</dt>
@@ -25,6 +26,7 @@ export default {
           <li>Adatműveletek kidolgozása</li>
           <li>Kód, dokumentáció írása</li>
           <li>Adatok áramlásának kivitelezése</li>
+          <li>Autentikáció kidolgozása</li>
         </ul>
       </dd>
     </dl>
@@ -39,7 +41,7 @@ export default {
       <dt>Word</dt>
       <dd>
         <ul>
-          <li>Fejlesztés, tesztelés dokumentációja</li>
+          <li>Dokumentációk megírása</li>
         </ul>
       </dd>
       <dt>Paint</dt>

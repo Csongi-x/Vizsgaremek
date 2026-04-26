@@ -18,7 +18,7 @@ export default{
         const credentials = {email: email, password: password}
         try {
           // 1. Backend hívás
-          const res = await http.post('/login', credentials);
+          const res = await http.post('/api/login', credentials);
 
           // 2. Adatok kinyerése
           const { token, user } = res.data;
@@ -45,7 +45,10 @@ export default{
       }
     },
     toggle() {
-      document.querySelector('[name="password"]').type = document.querySelector('[name="password"]').type === 'password' ? 'text' : 'password'
+      document.querySelector('[name="password"]').type =
+          document.querySelector('[name="password"]').type === 'password'
+              ? 'text'
+              : 'password'
     }
   }
 }

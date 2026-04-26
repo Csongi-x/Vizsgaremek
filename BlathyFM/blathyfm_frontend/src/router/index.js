@@ -126,6 +126,16 @@ const router = createRouter({
       }
   },
       {
+          path: '/student/beforeaccept',
+          name: 'before-accept',
+          component: () => import('@/views/studentsView/StudentPendingMusicView.vue'),
+          meta: {
+              title: "Ellenőrzés előtti zenék",
+              requiresAuth: true,
+              role: 'student'
+          }
+      },
+      {
           path: '/scheduler/check',
           name: 'scheduler-check',
           component: SchedulerAcceptMusicView,

@@ -24,8 +24,15 @@ export default{
       })
     },
     toggle() {
-      document.querySelector('[name="password"]').type = document.querySelector('[name="password"]').type === 'password' ? 'text' : 'password'
-      document.querySelector('[name="passwordAgain"]').type = document.querySelector('[name="passwordAgain"]').type === 'password' ? 'text' : 'password'
+      document.querySelector('[name="password"]').type =
+          document.querySelector('[name="password"]').type === 'password'
+              ? 'text'
+              : 'password'
+
+      document.querySelector('[name="passwordAgain"]').type
+          = document.querySelector('[name="passwordAgain"]').type === 'password'
+          ? 'text'
+          : 'password'
     }
   },
   emits: ["register"]

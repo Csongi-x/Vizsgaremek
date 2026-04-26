@@ -27,7 +27,7 @@ export default {
     async register({fullName, email, password, passwordAgain, role, status}) { // regisztráció (adminnak beküldeni a fiókot)
       let response = null
       try {
-        response = await http.post('api/register', {
+        response = await http.post('/api/register', {
           full_name: fullName,
           email: email,
           password: password,
@@ -35,10 +35,10 @@ export default {
           role: role,
           status: status
         })
+        this.$router.push({name: 'waiting'})
       } catch (error) {
         this.error = ` Hiba: ${error}`
       }
-      this.$router.push({name: 'waiting'})
     },
     async send(newMusic) {
       try {
