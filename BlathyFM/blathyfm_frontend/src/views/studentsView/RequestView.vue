@@ -12,6 +12,9 @@ export default{
       songs:[], //elérhető zenék
       selectedSong: null,
       query: '',
+      genre: '',
+      genres: ["hit", "rock", "metal", "pop", "hip-hop", "jazz", "reggae", "alternative", "vaporwave", "country", "electronic", "folk", "other"],
+      genresHu: ["Sláger", "Rock and roll", "Metal", "Pop", "Hip-hop", "Jazz", "Reggae", "Alternatív", "Vaporwave", "Vidékies/Country", "Elektronikus", "Népzene", "Egyéb"],
       loading: false,
       pageNumber: 1, // oldalszám
       error: '',
@@ -29,12 +32,17 @@ export default{
       return this.filteredSongs.slice(start, end);
     },
     filteredSongs(){
-      if(!this.query){
-        return this.songs;
-      }
+      let songs = this.songs
       const q = this.query.toLowerCase();
 
-      return this.songs.filter(song => song.title.toLowerCase().includes(q) || song.author.toLowerCase().includes(q));
+      songs = songs.filter(
+          song => song.title.toLowerCase().includes(q)
+              || song.author.toLowerCase().includes(q)
+      );
+
+      const genre = this.genre
+      if (!genre) return songs
+      return songs.filter(song => song.genre === genre)
     },
 
 
@@ -72,6 +80,17 @@ export default{
     },
     beforeAccept() {
       this.$router.push({name: 'before-accept'})
+    },
+    loadGenres() {
+      let x = 0
+      const select = document.querySelector("select")
+      for (let genre of this.genres) {
+        let option = document.createElement("option")
+        option.value = genre
+        option.textContent = this.genresHu[x]
+        select.add(option)
+        x++
+      }
     }
   },
   watch: {
@@ -80,27 +99,32 @@ export default{
     }
   },
   mounted() {
-    this.loadMusic();
+    this.loadGenres()
+    this.loadMusic()
   }
 }
 </script>
 
 <template>
-  <section class="fm-container">
-    <article class="left-panel">
+  <section class="row">
+    <article class="left-panel col-12 col-sm-12 col-md-6 col-lg-9">
       <h2 class="h3 search-bar">
         <span class="search-icon">
           <i class="bi bi-search"/>
         </span>
         <input v-model="query" type="search" class="fullBorder">
+        &nbsp;Műfaj:&nbsp;
+        <select name="genre" id="genre" v-model="genre" @input="">
+          <option value="">Minden</option>
+        </select>
       </h2>
-      <div class="song-grid">
+      <div class="song-grid g-0">
         <Spinner v-if="loading"/>
         <RequestableMusicRow v-for="music in songsToDisplay" :key="music.id" :music="music"/>
       </div>
     </article>
 
-    <aside class="right-panel">
+    <aside class="right-panel col-12 col-sm-12 col-md-6 col-lg-3">
       <div class="pagination-box">
         <div class="page-number">
           <input type="number" v-model.number="pageNumber" min="1" :max="maxPageNumber">
@@ -133,12 +157,8 @@ export default{
 
 <style scoped>
 /* Alapszínek és elrendezés */
-.fm-container {
-  display: grid;
-  grid-template-columns: 1fr 250px; /* Bal oldal rugalmas, jobb oldal fix */
-  gap: 15px;
-  padding: 15px;
-  color: black;
+.row {
+  height: 85vh;
 }
 
 .right-panel, .slots {
@@ -158,6 +178,12 @@ export default{
   display: flex;
   align-items: center;
   padding: 2px 8px;
+}
+
+select {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
 }
 
 .search-bar input {

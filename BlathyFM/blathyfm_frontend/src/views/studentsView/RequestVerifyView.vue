@@ -6,7 +6,7 @@ export default {
   data(){
     return{
       music: {},
-      email: '10011010100101@blathy.info', // autentikáció még nincs megoldva, ha meg lesz, ezt javítsd ki!
+      email: '',
       message: ''
     }
   },
@@ -37,6 +37,7 @@ export default {
   },
   mounted() {
     this.loadMusicById(this.$route.params.id)
+    this.email = localStorage.getItem('email')
   },
   emits: ['request:song']
 }
@@ -69,8 +70,8 @@ export default {
 
 <style scoped>
 section {
-  width: 97vh;
-  height: 85vh;
+  width: 100vh;
+  height: 100vh;
 }
 
 .nothing {

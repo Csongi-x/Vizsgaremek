@@ -32,8 +32,8 @@ export default {
       </li>
       <li>
         Amennyiben a zene szövege nem ellenőrizhető (pl. nincs a leírásban, vagy keresésre egyáltalán nem található
-        meg), akkor sajnos a dalt kénytelen az adminisztrátor elutasítani, mivel nem tudja ellenőrizni, hogy a dal
-        helyénvaló-e.
+        meg), akkor a dalt az ütemező végighallgatja, hogy helyénvaló-e, de ez nem kötelező és az ütemező ebben
+        az esetben automatikusan elutasíthatja a zenét.
       </li>
       <li>
         Amennyiben egy előadó nézetei, gondolkodásmódja nem helyénvaló vagy veszélyes, akkor az adott előadótól

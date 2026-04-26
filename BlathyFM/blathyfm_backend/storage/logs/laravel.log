@@ -14404,3 +14404,15 @@
 #39 C:/Users/susan/Desktop/Repositoryk/Vizsgaremek/BlathyFM/blathyfm_backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('C://Users//susan//...')
 #40 {main}
 "} 
+[2026-04-26 19:30:05] local.DEBUG: array (
+  'received_id' => 1,
+  'exists' => true,
+)  
+[2026-04-26 19:30:30] local.DEBUG: array (
+  'received_id' => 34,
+  'exists' => true,
+)  
+[2026-04-26 19:30:45] local.DEBUG: array (
+  'received_id' => 43,
+  'exists' => true,
+)  

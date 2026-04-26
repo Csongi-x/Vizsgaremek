@@ -86,10 +86,7 @@ export default {
       }
     },
     deleteFromPlaylist(id) {
-      const index = this.playlistSongs.findIndex(song => song.id === id);
-      if (index !== -1) {
-        this.playlistSongs.splice(index, 1);
-      }
+      this.playlistSongs = this.playlistSongs.filter(song => song.id !== id)
     },
     isInPlaylist(songId) {
       return this.playlistSongs.some(

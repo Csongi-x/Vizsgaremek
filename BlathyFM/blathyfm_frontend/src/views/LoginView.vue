@@ -26,6 +26,7 @@ export default{
           // 3. Mentés a localStorage-ba, hogy a Router lássa
           localStorage.setItem('token', token);
           localStorage.setItem('role', user.role);
+          localStorage.setItem('email', user.email);
 
           // 4. Irányítás a router meta adatai alapján (vagy fixen)
           if (user.role === 'admin') {
