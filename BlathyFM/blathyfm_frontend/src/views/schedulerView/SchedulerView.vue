@@ -60,7 +60,7 @@ export default {
     addMusicToPlaylist(song) {
       if (!song?.id) return;
       const exists = this.playlistSongs.some(
-          item => Number(item.id) === Number(song.id)
+          item => item.author === song.author && item.title === song.title
       );
       if (!exists) {
         this.playlistSongs.push({ ...song });
@@ -88,9 +88,19 @@ export default {
     deleteFromPlaylist(id) {
       this.playlistSongs = this.playlistSongs.filter(song => song.id !== id)
     },
-    isInPlaylist(songId) {
+    isInPlaylist(song) {
       return this.playlistSongs.some(
-          item => Number(item.id) === Number(songId)
+          item => item.author === song.author && item.title === song.title
+      );
+    },
+    isInRequested(song) {
+      return this.requestedSongs.some(
+          item => item.author === song.author && item.title === song.title
+      );
+    },
+    isInAll(song) {
+      return this.songs.some(
+          item => item.author === song.author && item.title === song.title
       );
     },
     async updatePlaylist() {
@@ -110,21 +120,13 @@ export default {
   },
   computed: {
     filteredSongs() {
-      const query = this.searchQuery.toLowerCase().trim();
+      const query = this.searchQuery.toLowerCase().trim()
+      const queriedSongs = this.songs.filter(music => music.author.toLowerCase().includes(query) || music.title.toLowerCase().includes(query))
 
-      return this.songs
-          .filter(song => !this.isInPlaylist(song.id))
-          .filter(song => {
-            if (!query) return true;
-
-            return (
-                song.title?.toLowerCase().includes(query) ||
-                song.author?.toLowerCase().includes(query)
-            );
-          });
+      return queriedSongs.filter(song => !this.isInPlaylist(song)).filter(song => !this.isInRequested(song))
     },
     filteredRequested() {
-      return this.requestedSongs.filter(m => !this.isInPlaylist(m.id))
+      return this.requestedSongs.filter(song => !this.isInPlaylist(song)).filter(song => !this.isInAll(song))
     }
   },
   async mounted() {
