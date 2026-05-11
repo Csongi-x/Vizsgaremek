@@ -11,12 +11,6 @@ export default{
       error: ''
     }
   },
-  props: {
-    error: {
-      required: true,
-      type: String
-    }
-  },
   methods:{
     register() {
       // felhasználó regisztrálása (az admin dönt arról, hogy felvegye-e a fiókot majd)
@@ -50,6 +44,9 @@ export default{
     <div class="col-md-2 col-lg-4"></div>
     <div class="vertical col-12 col-sm-12 col-md-8 col-lg-4">
       <div class="loginPage">
+        <div class="errorPage" v-if="error !== ''"> <!-- Hibaüzenet -->
+          <p>{{error}}</p>
+        </div>
         <form class="w-100 align-items-center" @submit.prevent="register">
           <table>
             <tbody>
@@ -94,9 +91,6 @@ export default{
           <!--regisztráció-->
           <button type="submit">Regisztráció</button>
         </form>
-      </div>
-      <div class="errorPage" v-if="error !== ''"> <!-- Hibaüzenet -->
-        <p>{{error}}</p>
       </div>
     </div>
     <div class="col-md-2 col-lg-4"></div>
