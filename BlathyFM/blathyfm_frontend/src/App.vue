@@ -35,9 +35,10 @@ export default {
           role: role,
           status: status
         })
-        this.$router.push({name: 'waiting'})
+        await this.$router.push({name: 'waiting'})
       } catch (error) {
-        this.error = ` Hiba: ${error}`
+          console.log(error.response.data.message)
+        this.error = ` Hiba: ${error.response.data.message}`
       }
     },
     async send(newMusic) {
@@ -74,9 +75,8 @@ export default {
     <NavBar/>
   </header>
   <main class="container">
-    <router-view @register="register" @send="send"
-                 @accept="acceptUser" @decline="declineUser"
-                 :email="email" :password="password" :role="role"/>
+    <router-view @register="register" @send="send" @accept="acceptUser" @decline="declineUser"
+                 :email="email" :password="password" :role="role" :error="error"/>
   </main>
   <footer>
     <FooterView/>
