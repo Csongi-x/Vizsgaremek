@@ -88,9 +88,14 @@ export default {
     deleteFromPlaylist(id) {
       this.playlistSongs = this.playlistSongs.filter(song => song.id !== id)
     },
-    isInPlaylist(songId) {
+    isInPlaylist(song) {
       return this.playlistSongs.some(
-          item => Number(item.id) === Number(songId)
+          songToFind => songToFind.author === song.author && songToFind.title === song.title
+      );
+    },
+    isInRequested(song) {
+      return this.filteredRequested.some(
+          songToFind => songToFind.author === song.author && songToFind.title === song.title
       );
     },
     async updatePlaylist() {
@@ -111,8 +116,14 @@ export default {
   computed: {
     filteredSongs() {
       const query = this.searchQuery.toLowerCase().trim();
+      return this.songs.filter(
+          song =>
+              song.toLowerCase().includes(query ?? '')
+              && !this.isInRequested(song)
+              && !this.isInPlaylist(song)
+      )
 
-      return this.songs
+      /*return this.songs
           .filter(song => !this.isInPlaylist(song.id))
           .filter(song => {
             if (!query) return true;
@@ -121,10 +132,10 @@ export default {
                 song.title?.toLowerCase().includes(query) ||
                 song.author?.toLowerCase().includes(query)
             );
-          });
+          });*/
     },
     filteredRequested() {
-      return this.requestedSongs.filter(m => !this.isInPlaylist(m.id))
+      return this.requestedSongs.filter(m => !this.isInPlaylist(m))
     }
   },
   async mounted() {
