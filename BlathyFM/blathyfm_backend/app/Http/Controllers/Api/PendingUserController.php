@@ -80,7 +80,7 @@ class PendingUserController extends Controller
                     "full_name" => $user->full_name,
                     "email" => $user->email,
                     "role" => $user->role,
-                    "password" => Hash::make($user->password)
+                    "password" => $user->password
                 ]
             );
         } else {
